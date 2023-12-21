@@ -1,0 +1,39 @@
+@font-face {
+    font-family: 'Maragsa';
+    src: url('./Maragsâ.otf') format('opentype');
+  }
+  
+@font-face {
+    font-family: 'Poppins';
+    src: url('./Poppins-Regular.ttf') format('opentype');
+  }
+  
+@font-face {
+    font-family: 'Buenard';
+    src: url('./Buenard-Regular.ttf') format('opentype');
+  }
+
+@font-face {
+    font-family: 'Poly';
+    src: url('./Poly-Regular.ttf') format('opentype');
+}
+
+@font-face {
+  font-family: 'Aclonica';
+  src: url('./Aclonica-Regular.ttf') format('opentype');
+}
+
+@font-face {
+  font-family: 'Rakkas';
+  src: url('./Rakkas-Regular.ttf') format('opentype');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('./Roboto-Regular.ttf') format('opentype');
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('./Montserrat-Regular.ttf') format('opentype');
+}
