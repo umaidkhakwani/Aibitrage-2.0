@@ -68,7 +68,7 @@ function Swap_function() {
     const nameAndPriceArray = [];
 
     axios
-      .get("http://localhost:3001/api/cryptocurrency")
+      .get("http://194.163.45.79:3001/api/api/cryptocurrency")
       .then((response) => {
         const data = response.data;
         data.data.forEach((coin) => {
@@ -398,7 +398,7 @@ function Swap_function() {
                                 margin: "0px 0px 0px 3px",
                               }}
                             >
-                              ${menuItem.price.toFixed(2)}
+                              ${menuItem.price.toFixed(2)|| "49000"}
                             </Typography>
                           </Grid>
                         </Grid>
@@ -500,7 +500,7 @@ function Swap_function() {
                   // margin: "5px",
                 }}
               >
-                {(coinSelected.price/coinSelected2.price).toFixed(8) * userInput}
+                {((coinSelected.price/coinSelected2.price).toFixed(8) * userInput) || "9000"}
                 {/* {coinSelected.price > coinSelected2.price ? (coinSelected.price/coinSelected2.price).toFixed(4) * userInput: (coinSelected2.price/coinSelected.price).toFixed(4) * userInput} */}
 
               </Typography>
@@ -588,7 +588,7 @@ function Swap_function() {
                                 // color: "#9E9D9D",
                               }}
                             >
-                              ${menuItem.price.toFixed(2)}
+                              ${menuItem.price.toFixed(2) || "49000"}
                             </Typography>
                           </Grid>
                         </Grid>
@@ -631,7 +631,7 @@ function Swap_function() {
                     width: "80%",
                   }}
                 >
-                  1 {coinSelected.symbol} = {(coinSelected.price/coinSelected2.price).toFixed(8)}{" "}
+                  1 {coinSelected.symbol || "BTC"} = {((coinSelected.price/coinSelected2.price).toFixed(8)) || "49000"}{" "}
                   {coinSelected2.symbol}
                 </Typography>
               </Grid>

@@ -78,7 +78,7 @@ function Bridge_function() {
     const nameAndPriceArray = [];
 
     axios
-      .get("http://localhost:3001/api/cryptocurrency")
+    .get("http://194.163.45.79:3001/api/api/cryptocurrency")
       .then((response) => {
         const data = response.data;
         data.data.forEach((coin) => {
@@ -458,7 +458,7 @@ function Bridge_function() {
                                         margin: "0px 0px 0px 3px",
                                       }}
                                     >
-                                      ${menuItem.price.toFixed(8)}
+                                      ${menuItem.price.toFixed(8) || "49000"}
                                     </Typography>
                                   </Grid>
                                 </Grid>
@@ -575,7 +575,7 @@ function Bridge_function() {
                                         margin: "0px 0px 0px 3px",
                                       }}
                                     >
-                                      ${menuItem.price.toFixed(2)}
+                                      ${menuItem.price.toFixed(2) || "49000"}
                                     </Typography>
                                   </Grid>
                                 </Grid>
@@ -836,7 +836,7 @@ function Bridge_function() {
                                         margin: "0px 0px 0px 3px",
                                       }}
                                     >
-                                      ${menuItem.price.toFixed(8)}
+                                      ${menuItem.price.toFixed(8) || "49000"}
                                     </Typography>
                                   </Grid>
                                 </Grid>
