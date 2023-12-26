@@ -15,6 +15,9 @@ import coin2 from "../../images/coin2.png";
 import arrow from "../../images/arrow.png";
 import btc from "../../images/btc.png";
 import usdt from "../../images/usdt.png";
+import eth from "../../images/eth.png";
+import xrp from "../../images/xrp.png";
+
 import polygon_left from "../../images/Polygon_left.png";
 import polygon_right from "../../images/Polygon_right.png";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
@@ -24,6 +27,7 @@ import swap_right from "../../images/swap_right.svg";
 import "../../fonts/fonts.css";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import axios from "axios";
 
 function Bridge_function() {
   const theme = useTheme();
@@ -68,6 +72,49 @@ function Bridge_function() {
   const [receiverAddress, setReceiverAddress] = useState("");
   const [connected, setconnected] = useState(false);
   const [amount, setamount] = useState("");
+  const [coinsData, setCoinsData] = useState([]);
+
+  const handleApi = async () => {
+    const nameAndPriceArray = [];
+
+    axios
+      .get("http://localhost:3001/api/cryptocurrency")
+      .then((response) => {
+        const data = response.data;
+        data.data.forEach((coin) => {
+          console.log("coin :", coin.quote.USD.price);
+          let name = coin.name;
+          let price = coin.quote.USD.price;
+          let symbol = coin.symbol;
+          let change = coin.quote.USD.percent_change_1h;
+          let image =
+            symbol === "BTC"
+              ? btc
+              : symbol === "ETH"
+              ? eth
+              : symbol === "USDT"
+              ? usdt
+              : xrp;
+          if (
+            symbol === "BTC" ||
+            symbol === "ETH" ||
+            symbol === "USDT" ||
+            symbol === "XRP"
+          )
+            nameAndPriceArray.push({ name, price, symbol, change, image });
+        });
+        console.log("API Response:", response.data);
+        console.log("nameAndPriceArray:", nameAndPriceArray);
+        setCoinsData(nameAndPriceArray);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
+
+  useEffect(() => {
+    handleApi();
+  }, []);
 
   const handleReceiver_address = (event) => {
     const value = event.target.value;
@@ -142,9 +189,9 @@ function Bridge_function() {
     }
   };
 
-const handle_connect = () => {
-  setconnected(true);  
-}
+  const handle_connect = () => {
+    setconnected(true);
+  };
 
   useEffect(() => {
     handleProfileClose();
@@ -338,7 +385,7 @@ const handle_connect = () => {
                           margin: "5px",
                         }}
                       >
-                        {coinSelected.label || "Network"}
+                        {coinSelected.symbol || "Network"}
                       </Typography>
                       <KeyboardArrowDownIcon sx={{ color: "white" }} />
                       <Menu
@@ -354,7 +401,7 @@ const handle_connect = () => {
                           },
                         }}
                       >
-                        {dummyMenuItems.map((menuItem) => (
+                        {coinsData.map((menuItem) => (
                           <MenuItem
                             key={menuItem.id}
                             sx={{
@@ -380,7 +427,11 @@ const handle_connect = () => {
                                 <img
                                   src={menuItem.image}
                                   alt={`Coin${menuItem.id}`}
-                                  style={{ width: "80%", height: "70%" }}
+                                  style={{
+                                    width: "25px",
+                                    height: "25px",
+                                    marginRight: "10px",
+                                  }}
                                 />
                               </Grid>
                               <Grid item>
@@ -394,7 +445,7 @@ const handle_connect = () => {
                                         margin: "0px 0px 0px 0px",
                                       }}
                                     >
-                                      {menuItem.label}
+                                      {menuItem.symbol}
                                     </Typography>
                                   </Grid>
                                   <Grid item>
@@ -407,7 +458,7 @@ const handle_connect = () => {
                                         margin: "0px 0px 0px 3px",
                                       }}
                                     >
-                                      ${menuItem.value.toFixed(2)}
+                                      ${menuItem.price.toFixed(8)}
                                     </Typography>
                                   </Grid>
                                 </Grid>
@@ -451,7 +502,7 @@ const handle_connect = () => {
                           margin: "5px",
                         }}
                       >
-                        {coinSelected2.label || "Network"}
+                        {coinSelected2.symbol || "Network"}
                       </Typography>
                       <KeyboardArrowDownIcon sx={{ color: "white" }} />
                       <Menu
@@ -467,7 +518,7 @@ const handle_connect = () => {
                           },
                         }}
                       >
-                        {dummyMenuItems.map((menuItem) => (
+                        {coinsData.map((menuItem) => (
                           <MenuItem
                             key={menuItem.id}
                             sx={{
@@ -493,7 +544,11 @@ const handle_connect = () => {
                                 <img
                                   src={menuItem.image}
                                   alt={`Coin${menuItem.id}`}
-                                  style={{ width: "80%", height: "70%" }}
+                                  style={{
+                                    width: "25px",
+                                    height: "25px",
+                                    marginRight: "10px",
+                                  }}
                                 />
                               </Grid>
                               <Grid item>
@@ -507,7 +562,7 @@ const handle_connect = () => {
                                         margin: "0px 0px 0px 0px",
                                       }}
                                     >
-                                      {menuItem.label}
+                                      {menuItem.symbol}
                                     </Typography>
                                   </Grid>
                                   <Grid item>
@@ -520,7 +575,7 @@ const handle_connect = () => {
                                         margin: "0px 0px 0px 3px",
                                       }}
                                     >
-                                      ${menuItem.value.toFixed(2)}
+                                      ${menuItem.price.toFixed(2)}
                                     </Typography>
                                   </Grid>
                                 </Grid>
@@ -708,7 +763,7 @@ const handle_connect = () => {
                           margin: "5px",
                         }}
                       >
-                        {coinSelected3.label || "BTC"}
+                        {coinSelected3.symbol || "BTC"}
                       </Typography>
                       <KeyboardArrowDownIcon sx={{ color: "white" }} />
                       <Menu
@@ -724,7 +779,7 @@ const handle_connect = () => {
                           },
                         }}
                       >
-                        {dummyMenuItems.map((menuItem) => (
+                        {coinsData.map((menuItem) => (
                           <MenuItem
                             key={menuItem.id}
                             sx={{
@@ -750,7 +805,11 @@ const handle_connect = () => {
                                 <img
                                   src={menuItem.image}
                                   alt={`Coin${menuItem.id}`}
-                                  style={{ width: "80%", height: "70%" }}
+                                  style={{
+                                    width: "25px",
+                                    height: "25px",
+                                    marginRight: "10px",
+                                  }}
                                 />
                               </Grid>
                               <Grid item>
@@ -764,7 +823,7 @@ const handle_connect = () => {
                                         margin: "0px 0px 0px 0px",
                                       }}
                                     >
-                                      {menuItem.label}
+                                      {menuItem.symbol}
                                     </Typography>
                                   </Grid>
                                   <Grid item>
@@ -777,7 +836,7 @@ const handle_connect = () => {
                                         margin: "0px 0px 0px 3px",
                                       }}
                                     >
-                                      ${menuItem.value.toFixed(2)}
+                                      ${menuItem.price.toFixed(8)}
                                     </Typography>
                                   </Grid>
                                 </Grid>
@@ -838,7 +897,8 @@ const handle_connect = () => {
                         margin: "5px 0px 0px 5px",
                       }}
                     >
-                      In Wallet: {coinSelected3.wallet || 0} {coinSelected3.label}
+                      In Wallet: {coinSelected3.wallet || 0}{" "}
+                      {coinSelected3.symbol || "BTC"}
                     </Typography>
                   </Box>
                 </Box>
@@ -882,7 +942,7 @@ const handle_connect = () => {
                 <Typography
                   sx={{
                     fontFamily: "Aclonica",
-                    fontSize: "11px",
+                    fontSize: "9px",
                     color: "white",
                     margin: "5px 0px 0px 5px",
                   }}
@@ -893,7 +953,7 @@ const handle_connect = () => {
                 <Typography
                   sx={{
                     fontFamily: "Aclonica",
-                    fontSize: "11px",
+                    fontSize: "9px",
                     color: "white",
                     margin: "5px 0px 0px 5px",
                   }}
@@ -905,7 +965,7 @@ const handle_connect = () => {
                 <Typography
                   sx={{
                     fontFamily: "Aclonica",
-                    fontSize: "11px",
+                    fontSize: "9px",
                     color: "white",
                     margin: "5px 0px 0px 5px",
                   }}
@@ -916,7 +976,7 @@ const handle_connect = () => {
                 <Typography
                   sx={{
                     fontFamily: "Aclonica",
-                    fontSize: "11px",
+                    fontSize: "9px",
                     color: "white",
                     margin: "5px 0px 0px 5px",
                   }}
@@ -928,12 +988,37 @@ const handle_connect = () => {
                 <Typography
                   sx={{
                     fontFamily: "Aclonica",
-                    fontSize: "11px",
+                    fontSize: "9px",
                     color: "white",
                     margin: "5px 0px 0px 5px",
                   }}
                 >
                   Receiver Address
+                </Typography>
+
+                <Typography
+                  sx={{
+                    fontFamily: "Aclonica",
+                    fontSize: "9px",
+                    color: "white",
+                    maxWidth: "50%",
+                    overflowX: "hidden",
+                    margin: "5px 0px 0px 5px",
+                  }}
+                >
+                  {receiverAddress || "-"}
+                </Typography>
+              </Box>
+              <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+                <Typography
+                  sx={{
+                    fontFamily: "Aclonica",
+                    fontSize: "9px",
+                    color: "white",
+                    margin: "5px 0px 0px 5px",
+                  }}
+                >
+                  {coinSelected3.symbol || "BTC"}
                 </Typography>
 
                 <Typography
@@ -946,7 +1031,7 @@ const handle_connect = () => {
                     margin: "5px 0px 0px 5px",
                   }}
                 >
-                  {receiverAddress || "-"}
+                  ${coinSelected3.price?.toFixed(8) || "-"}
                 </Typography>
               </Box>
             </Container>

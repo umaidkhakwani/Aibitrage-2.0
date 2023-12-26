@@ -27,12 +27,14 @@ import pool2_graph from "../../images/pool2_graph.png";
 import pool3_graph from "../../images/pool3_graph.png";
 import pool4_graph from "../../images/pool4_graph.png";
 
+import pool_chart from "../../images/pool_chart.svg";
+
 import "../../fonts/fonts.css";
+
+// import "./Pools.css";
 
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import MultiLayeredHalfDoughnutChart from "./Chart/Pool_chart";
-import MultiSeriesPieChart from "./Chart/Pool_chart";
 
 function Pool_function() {
   const theme = useTheme();
@@ -51,14 +53,14 @@ function Pool_function() {
   return (
     <Box
       sx={{
-        width: "100%",
+        width: "80%",
         height: "100%",
-        marginTop: "150px",
+        marginTop: isSmScreen?"250px":"170px",
         display: "flex",
         // justifyContent: "center",
         flexDirection: "column",
         // alignItems:"center",
-        overflowY: "auto",
+        overflowY: "visible",
       }}
     >
       {!isMdScreen ? (
@@ -89,13 +91,18 @@ function Pool_function() {
       ) : null}
       <Box sx={{ width: "90%", height: "100%" }}>
         <Typography
-          sx={{ fontFamily: "Aclonica", fontSize: "16px", color: "white", margin:"10px" }}
+          sx={{
+            fontFamily: "Aclonica",
+            fontSize: "16px",
+            color: "white",
+            margin: "10px",
+          }}
         >
           Total Arbitrage
         </Typography>
       </Box>
-      <Box sx={{ width: "90%", height: "22%" }}>
-        <Grid container sx={{ height: "100%", width: "100%" }}>
+      <Box sx={{ width: "90%", height:"100%"}}>
+        <Grid container sx={{ width: "100%" }}>
           <Grid
             item
             xs={12}
@@ -109,14 +116,13 @@ function Pool_function() {
               height: "100%",
             }}
           >
-            {/* Card 1 */}
             <Card
               sx={{
                 backgroundColor: "#50A883",
                 borderRadius: "12px",
                 margin: "0 10px 20px",
                 width: "80%",
-                height: "83px",
+                height: "100%",
                 position: "relative",
                 zIndex: "2",
               }}
@@ -158,14 +164,13 @@ function Pool_function() {
               height: "100%",
             }}
           >
-            {/* Card 1 */}
             <Card
               sx={{
                 backgroundColor: "#50A883",
                 borderRadius: "12px",
                 margin: "0 10px 20px",
                 width: "80%",
-                height: "83px",
+                height: "100%",
                 position: "relative",
                 zIndex: "2",
               }}
@@ -207,14 +212,13 @@ function Pool_function() {
               height: "100%",
             }}
           >
-            {/* Card 1 */}
             <Card
               sx={{
                 backgroundColor: "#50A883",
                 borderRadius: "12px",
                 margin: "0 10px 20px",
                 width: "80%",
-                height: "83px",
+                height: "100%",
                 position: "relative",
                 zIndex: "2",
               }}
@@ -245,7 +249,9 @@ function Pool_function() {
           </Grid>
         </Grid>
       </Box>
-      <Box sx={{ width: "95%", height: "30px" , position:"relative", zIndex:"2"}}>
+      <Box
+        sx={{ width: "95%", height: "100%", position: "relative", zIndex: "2" }}
+      >
         <Typography
           sx={{
             fontFamily: "Aclonica",
@@ -470,8 +476,13 @@ function Pool_function() {
           </div>
         </Container>
       </Box>
-      <Box>
-      <MultiSeriesPieChart />
+
+      <Box sx={{display:"flex", justifyContent:"center", alignItems:"center"}}>
+        <img
+          src={pool_chart}
+          alt="pool chart"
+          style={{ width: "325px", margin:"40px 0px" }}
+        />
       </Box>
     </Box>
   );

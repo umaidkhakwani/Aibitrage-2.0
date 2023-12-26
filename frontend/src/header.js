@@ -38,6 +38,7 @@ import Not_found from "./pages/not_found";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import styled from "styled-components";
+import Launch_App_ModalComponent from "./pages/Launch_App_modal";
 
 const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
 
@@ -53,6 +54,7 @@ function Header_Function() {
   const [value, setValue] = useState(-1);
   const [page, setPage] = useState(-1);
   const [activeTab, setActiveTab] = useState("");
+  const [app_active, set_App_active] = useState(true);
 
   const TabsContainer = styled.div`
     display: flex;
@@ -98,7 +100,13 @@ function Header_Function() {
   };
 
   const handleClick = () => {
-    navigate("/app");
+    if (isSmScreen) 
+    {
+      set_App_active(false);
+    }
+    else{
+      navigate("/app");
+    }
   };
 
   const getTabName = (index) => {
@@ -293,6 +301,7 @@ function Header_Function() {
                 </button>
               </Grid>
             </Grid>
+            {app_active ? "" : <Launch_App_ModalComponent /> }
             {/* <Paper
           sx={{
             position: "absolute",

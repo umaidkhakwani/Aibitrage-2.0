@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Container,
@@ -14,6 +14,8 @@ import transfer from "../../images/transfer_new.png";
 import coin1 from "../../images/coin1.png";
 import btc from "../../images/btc.png";
 import usdt from "../../images/usdt.png";
+import eth from "../../images/eth.png";
+import xrp from "../../images/xrp.png";
 
 import swap_left from "../../images/swap_left.svg";
 import swap_right from "../../images/swap_right.svg";
@@ -23,6 +25,7 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import "../../fonts/fonts.css";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import axios from "axios";
 
 function Swap_function() {
   const theme = useTheme();
@@ -58,6 +61,39 @@ function Swap_function() {
   const [profileAnchorEl2, setProfileAnchorEl2] = useState(null);
   const [userInput2, setUserInput2] = useState(0);
   const [coinSelected2, setcoinSelected2] = useState("");
+  const [coinsData, setCoinsData] = useState([]);
+
+
+  const handleApi = async () => {
+    const nameAndPriceArray = [];
+
+    axios
+      .get("http://localhost:3001/api/cryptocurrency")
+      .then((response) => {
+        const data = response.data;
+        data.data.forEach((coin) => {
+          console.log("coin :", coin.quote.USD.price);
+          let name = coin.name;
+          let price = coin.quote.USD.price;
+          let symbol = coin.symbol;
+          let change = coin.quote.USD.percent_change_1h;
+          let image = symbol === "BTC" ? btc : symbol === "ETH" ? eth: symbol === "USDT" ? usdt : xrp ;
+          if(symbol === "BTC" || symbol === "ETH" || symbol === "USDT" || symbol === "XRP")
+            nameAndPriceArray.push({ name, price, symbol, change , image});
+        });
+        console.log("API Response:", response.data);
+        console.log("nameAndPriceArray:", nameAndPriceArray);
+        setCoinsData(nameAndPriceArray);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
+
+  useEffect(() => {
+    handleApi();
+  }, []);
+
 
   const handleProfileClose = () => {
     setProfileAnchorEl(null);
@@ -240,7 +276,7 @@ function Swap_function() {
                     margin: "5px",
                   }}
                 >
-                  {coinSelected.label || "BTC"}
+                  {coinSelected.symbol || "BTC"}
                 </Typography>
                 <KeyboardArrowDownIcon sx={{ color: "white" }} />
               </Box>
@@ -262,7 +298,7 @@ function Swap_function() {
                     margin: "5px",
                   }}
                 >
-                  Balance {coinSelected.wallet} {coinSelected.label}
+                  Balance {coinSelected.wallet || 10} {coinSelected.symbol || "BTC"} 
                 </Typography>
               </Box>  
               {/* <Typography
@@ -309,7 +345,7 @@ function Swap_function() {
                   },
                 }}
               >
-                {dummyMenuItems.map((menuItem) => (
+                {coinsData.map((menuItem) => (
                   <MenuItem
                     key={menuItem.id}
                     sx={{
@@ -335,7 +371,7 @@ function Swap_function() {
                         <img
                           src={menuItem.image}
                           alt={`Coin${menuItem.id}`}
-                          style={{ width: "80%", height: "70%" }}
+                          style={{ width: "25px", height: "25px" ,marginRight:"10px" }}
                         />
                       </Grid>
                       <Grid item>
@@ -349,7 +385,7 @@ function Swap_function() {
                                 margin: "0px 0px 0px 0px",
                               }}
                             >
-                              {menuItem.label}
+                              {menuItem.symbol}
                             </Typography>
                           </Grid>
                           <Grid item>
@@ -362,7 +398,7 @@ function Swap_function() {
                                 margin: "0px 0px 0px 3px",
                               }}
                             >
-                              ${menuItem.value.toFixed(2)}
+                              ${menuItem.price.toFixed(2)}
                             </Typography>
                           </Grid>
                         </Grid>
@@ -428,7 +464,7 @@ function Swap_function() {
                     margin: "5px",
                   }}
                 >
-                  {coinSelected2.label || "USDT"}
+                  {coinSelected2.symbol || "USDT"}
                 </Typography>
                 <KeyboardArrowDownIcon sx={{ color: "white" }} />
               </Box>
@@ -450,7 +486,7 @@ function Swap_function() {
                     margin: "5px",
                   }}
                 >
-                  Balance {coinSelected2.wallet} {coinSelected2.label}
+                  Balance {coinSelected2.wallet || 10} {coinSelected2.symbol}
                 </Typography>
               </Box>
               <Typography
@@ -464,7 +500,9 @@ function Swap_function() {
                   // margin: "5px",
                 }}
               >
-                ${coinSelected2.rate * userInput}
+                {(coinSelected.price/coinSelected2.price).toFixed(8) * userInput}
+                {/* {coinSelected.price > coinSelected2.price ? (coinSelected.price/coinSelected2.price).toFixed(4) * userInput: (coinSelected2.price/coinSelected.price).toFixed(4) * userInput} */}
+
               </Typography>
               {/* <input
               type="text"
@@ -497,7 +535,7 @@ function Swap_function() {
                   },
                 }}
               >
-                {dummyMenuItems.map((menuItem) => (
+                {coinsData.map((menuItem) => (
                   <MenuItem
                     key={menuItem.id}
                     sx={{
@@ -523,7 +561,7 @@ function Swap_function() {
                         <img
                           src={menuItem.image}
                           alt={`Coin${menuItem.id}`}
-                          style={{ width: "80%", height: "70%" }}
+                          style={{ width: "25px", height: "25px" ,marginRight:"10px" }}
                         />
                       </Grid>
                       <Grid item>
@@ -537,7 +575,7 @@ function Swap_function() {
                                 margin: "0px 0px 0px 0px",
                               }}
                             >
-                              {menuItem.label}
+                              {menuItem.symbol}
                             </Typography>
                           </Grid>
                           <Grid item>
@@ -550,7 +588,7 @@ function Swap_function() {
                                 // color: "#9E9D9D",
                               }}
                             >
-                              ${menuItem.value.toFixed(2)}
+                              ${menuItem.price.toFixed(2)}
                             </Typography>
                           </Grid>
                         </Grid>
@@ -593,8 +631,8 @@ function Swap_function() {
                     width: "80%",
                   }}
                 >
-                  1 {coinSelected.label} = {coinSelected2.rate}{" "}
-                  {coinSelected2.label}
+                  1 {coinSelected.symbol} = {(coinSelected.price/coinSelected2.price).toFixed(8)}{" "}
+                  {coinSelected2.symbol}
                 </Typography>
               </Grid>
             </Grid>

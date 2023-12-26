@@ -96,6 +96,7 @@ const ModalComponent = () => {
             color: "white",
             padding: "5px 20px",
             borderRadius: "20px",
+            border:"none",
             margin:"5px 20px",
             fontFamily:"Rakkas",
           }}

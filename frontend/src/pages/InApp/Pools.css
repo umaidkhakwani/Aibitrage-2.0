@@ -1,0 +1,16 @@
+/* Style the scrollbar */
+::-webkit-scrollbar {
+    width: 12px;
+  }
+  
+  /* Style the scrollbar thumb */
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(transparent, #30ff00);
+    border-radius: 6px;
+  }
+  
+  /* Style the scrollbar thumb on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(transparent, #30ff00);
+  }
+  

@@ -206,6 +206,16 @@ function Homepage({ callback }) {
   const [searchTerm, setSearchTerm] = useState("");
   const [email, setEmail] = useState("");
 
+  const coinMarketCap_Api = "bea15024-c66e-465e-89db-1d411266e961";
+  const coinMarketCap_link = "https://pro-api.coinmarketcap.com";
+  const apiEndpoint =
+    "https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest";
+
+  const headers = {
+    "X-CMC_PRO_API_KEY": coinMarketCap_Api,
+    Allow: "*/*",
+  };
+
   const handleSubscribe = () => {
     console.log("Subscribed with email:", email);
   };
@@ -228,26 +238,65 @@ function Homepage({ callback }) {
     navigate("/app");
   };
 
-  const api_link = "https://api.coinranking.com/v2/coins";
-
   const handleApi = async () => {
-    try {
-      const response = await axios.get(api_link);
-      const data = response.data;
-      const nameAndPriceArray = [];
+    const nameAndPriceArray = [];
 
-      data.data.coins.forEach((coin) => {
-        const { name, price, "24hVolume": volume, change } = coin;
-        nameAndPriceArray.push({ name, price, volume, change });
+    axios
+      .get("http://localhost:3001/api/cryptocurrency")
+      .then((response) => {
+        const data = response.data;
+        data.data.forEach((coin) => {
+          console.log("coin :", coin.quote.USD.price);
+          let name = coin.name;
+          let price = coin.quote.USD.price;
+          let symbol = coin.symbol;
+          let change = coin.quote.USD.percent_change_1h;
+          // const { name, "price" : quote: { USD: { price } } , "24hVolume": volume, change } = coin;
+          nameAndPriceArray.push({ name, price, symbol, change });
+        });
+        console.log("API Response:", response.data);
+        console.log("nameAndPriceArray:", nameAndPriceArray);
+        setCoinsData(nameAndPriceArray);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
       });
-      console.log(nameAndPriceArray);
-      console.log(data);
-      setCoinsData(nameAndPriceArray);
-      return data;
-    } catch (error) {
-      console.error("Error fetching data from the API:", error);
-      throw error; // You can choose to handle or propagate the error as needed
-    }
+
+    // name, quote.USD.price, symbol, quote.USD.percent_change_1h
+
+    // const data = response.data;
+    // console.log(data);
+    // const nameAndPriceArray = [];
+
+    // data.data.coins.forEach((coin) => {
+    //   const { name, price, "24hVolume": volume, change } = coin;
+    //   nameAndPriceArray.push({ name, price, volume, change });
+    // });
+    // console.log(nameAndPriceArray);
+    // console.log(data);
+    // setCoinsData(nameAndPriceArray);
+    // return data;
+    // } catch (error) {
+    //   console.error("Error fetching data from the API:", error);
+    //   throw error; // You can choose to handle or propagate the error as needed
+    // }
+    // try {
+    //   const response = await axios.get(api_link);
+    //   const data = response.data;
+    //   const nameAndPriceArray = [];
+
+    //   data.data.coins.forEach((coin) => {
+    //     const { name, price, "24hVolume": volume, change } = coin;
+    //     nameAndPriceArray.push({ name, price, volume, change });
+    //   });
+    //   console.log(nameAndPriceArray);
+    //   console.log(data);
+    //   setCoinsData(nameAndPriceArray);
+    //   return data;
+    // } catch (error) {
+    //   console.error("Error fetching data from the API:", error);
+    //   throw error; // You can choose to handle or propagate the error as needed
+    // }
   };
 
   useEffect(() => {
@@ -498,7 +547,7 @@ function Homepage({ callback }) {
                           color: "#ECF1F0",
                         }}
                       >
-                        $56,623.54
+                        ${(coinsData[0]?.price).toFixed(4) || "$43000"}
                       </Typography>
 
                       <Typography
@@ -510,7 +559,8 @@ function Homepage({ callback }) {
                           lineHeight: "1.2",
                         }}
                       >
-                        1.41%
+                        {(coinsData[0]?.change).toFixed(6) || "1.41"}%
+                        {/* 1.41% */}
                       </Typography>
                     </Grid>
                     <Grid item xs={6} sm={6} md={6} lg={6}>
@@ -572,7 +622,7 @@ function Homepage({ callback }) {
                           color: "#ECF1F0",
                         }}
                       >
-                        $4,267.90
+                        ${(coinsData[1]?.price).toFixed(4) || "$43000"}
                       </Typography>
 
                       <Typography
@@ -584,7 +634,7 @@ function Homepage({ callback }) {
                           lineHeight: "1.2",
                         }}
                       >
-                        2.22%
+                        {(coinsData[1]?.change).toFixed(6) || "1.41"}%
                       </Typography>
                     </Grid>
                     <Grid item xs={6} sm={6} md={6} lg={6}>
@@ -646,7 +696,7 @@ function Homepage({ callback }) {
                           color: "#ECF1F0",
                         }}
                       >
-                        $587.74
+                        ${(coinsData[4]?.price).toFixed(4) || "$43000"}
                       </Typography>
 
                       <Typography
@@ -658,7 +708,7 @@ function Homepage({ callback }) {
                           lineHeight: "1.2",
                         }}
                       >
-                        0.82%
+                        {(coinsData[0]?.change).toFixed(4) || "$43000"}%
                       </Typography>
                     </Grid>
                     <Grid item xs={6} sm={6} md={6} lg={6}>
@@ -720,7 +770,7 @@ function Homepage({ callback }) {
                           color: "#ECF1F0",
                         }}
                       >
-                        $0.9998
+                        ${(coinsData[2]?.price).toFixed(4) || "$43000"}
                       </Typography>
 
                       <Typography
@@ -732,7 +782,7 @@ function Homepage({ callback }) {
                           lineHeight: "1.2",
                         }}
                       >
-                        0.03%
+                        {(coinsData[2]?.change).toFixed(4) || "$43000"}%
                       </Typography>
                     </Grid>
                     <Grid item xs={6} sm={6} md={6} lg={6}>
@@ -1628,112 +1678,133 @@ function Homepage({ callback }) {
               <TableContainer>
                 <Table>
                   <TableBody>
-                    {[
-                      {
-                        name: "Bitcoin",
-                        symbol: "BTC",
-                        price: "$49990",
-                        percentageChange: "+1.68%",
-                        image: graph1,
-                      },
-                      {
-                        name: "Ethereum",
-                        symbol: "ETH",
-                        price: "$3890",
-                        percentageChange: "+0.68%",
-                        image: graph2,
-                      },
-                    ].map((row, index) => (
-                      <TableRow
-                        key={index}
-                        sx={{
-                          borderBottom: "2px solid #2B2C3B", // Set the color of the bottom border
-                        }}
-                      >
-                        <TableCell>
-                          <Typography
-                            variant="h6"
+                    {
+                      // [
+                      //   {
+                      //     name: "Bitcoin",
+                      //     symbol: "BTC",
+                      //     price: "$49990",
+                      //     percentageChange: "+1.68%",
+                      //     image: graph1,
+                      //   },
+                      //   {
+                      //     name: "Ethereum",
+                      //     symbol: "ETH",
+                      //     price: "$3890",
+                      //     percentageChange: "+0.68%",
+                      //     image: graph2,
+                      //   },
+                      // ].
+                      coinsData.map((row, index) =>
+                        row.symbol === "BTC" ||
+                        row.symbol === "ETH" ||
+                        row.symbol === "USDT" ||
+                        row.symbol === "XRP" ? (
+                          <TableRow
+                            key={index}
                             sx={{
-                              fontFamily: "Poppins",
-                              fontSize: "14px",
-                              color: "#fff",
+                              borderBottom: "2px solid #2B2C3B", // Set the color of the bottom border
                             }}
                           >
-                            {row.name}
-                          </Typography>
-                        </TableCell>
-                        <TableCell>
-                          <Typography
-                            variant="subtitle1"
-                            sx={{
-                              fontFamily: "Poppins",
-                              fontSize: "14px",
-                              color: "#B982FF",
-                            }}
-                          >
-                            {row.symbol}
-                          </Typography>
-                        </TableCell>
-                        <TableCell>
-                          <Typography
-                            variant="h6"
-                            sx={{
-                              fontFamily: "Poppins",
-                              fontSize: "14px",
-                              color: "#fff",
-                            }}
-                          >
-                            {row.price}
-                          </Typography>
-                        </TableCell>
-                        <TableCell>
-                          <Typography
-                            variant="subtitle1"
-                            sx={{
-                              fontFamily: "Poppins",
-                              fontSize: "14px",
-                              color: "green",
-                            }}
-                          >
-                            {row.percentageChange}
-                          </Typography>
-                        </TableCell>
-                        <TableCell>
-                          <img
-                            src={row.image}
-                            alt={`Image for ${row.name}`}
-                            style={{ width: "125px" }}
-                          />
-                        </TableCell>
-                        <TableCell>
-                          <Box
-                            sx={{
-                              width: "100%",
-                              display: "flex",
-                              flexDirection: "row",
-                              marginTop: "10px",
-                              justifyContent: "center",
-                            }}
-                          >
-                            <Typography
-                              sx={{
-                                fontFamily: "Roboto",
-                                fontSize: "12px",
-                                color: "#B982FF",
-                                lineHeight: "1.2",
-                                paddingTop: "5px",
-                                cursor: "pointer",
-                              }}
-                            >
-                              Trade Now
-                            </Typography>
-                            <ArrowRightAltIcon
-                              sx={{ marginLeft: "5px", color: "#B982FF" }}
-                            />
-                          </Box>
-                        </TableCell>
-                      </TableRow>
-                    ))}
+                            <TableCell>
+                              <Typography
+                                variant="h6"
+                                sx={{
+                                  fontFamily: "Poppins",
+                                  fontSize: "14px",
+                                  color: "#fff",
+                                }}
+                              >
+                                {row.name}
+                              </Typography>
+                            </TableCell>
+                            <TableCell>
+                              <Typography
+                                variant="subtitle1"
+                                sx={{
+                                  fontFamily: "Poppins",
+                                  fontSize: "14px",
+                                  color: "#B982FF",
+                                }}
+                              >
+                                {row.symbol}
+                              </Typography>
+                            </TableCell>
+                            <TableCell>
+                              <Typography
+                                variant="h6"
+                                sx={{
+                                  fontFamily: "Poppins",
+                                  fontSize: "14px",
+                                  color: "#fff",
+                                }}
+                              >
+                                ${row.price.toFixed(5)}
+                              </Typography>
+                            </TableCell>
+                            <TableCell>
+                              <Typography
+                                variant="subtitle1"
+                                sx={{
+                                  fontFamily: "Poppins",
+                                  fontSize: "14px",
+                                  color:
+                                    parseFloat(row.change) > 0
+                                      ? "green"
+                                      : "red",
+                                }}
+                              >
+                                {parseFloat(row.change) > 0
+                                  ? `+${row.change}%`
+                                  : `${row.change}%`}
+                              </Typography>
+                            </TableCell>
+                            <TableCell>
+                              <img
+                                src={
+                                  index === 0
+                                    ? graph1
+                                    : index === 1
+                                    ? graph2
+                                    : index === 2
+                                    ? graph3
+                                    : graph4
+                                }
+                                alt={`Image for ${row.name}`}
+                                style={{ width: "125px" }}
+                              />
+                            </TableCell>
+                            <TableCell>
+                              <Box
+                                sx={{
+                                  width: "100%",
+                                  display: "flex",
+                                  flexDirection: "row",
+                                  marginTop: "10px",
+                                  justifyContent: "center",
+                                }}
+                              >
+                                <Typography
+                                  sx={{
+                                    fontFamily: "Roboto",
+                                    fontSize: "12px",
+                                    color: "#B982FF",
+                                    lineHeight: "1.2",
+                                    paddingTop: "5px",
+                                    cursor: "pointer",
+                                  }}
+                                >
+                                  Trade Now
+                                </Typography>
+                                <ArrowRightAltIcon
+                                  sx={{ marginLeft: "5px", color: "#B982FF" }}
+                                />
+                              </Box>
+                            </TableCell>
+                          </TableRow>
+                        ) : null
+                      )
+                    }
                   </TableBody>
                 </Table>
               </TableContainer>

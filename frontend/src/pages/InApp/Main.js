@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Button,
@@ -67,6 +67,10 @@ import { Link, useNavigate } from "react-router-dom";
 import { useTheme } from "@mui/material/styles";
 import styled from "styled-components";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import axios from "axios";
+import ConnectWallet from "./wallets/Wallet";
+import Trust_wallet from "./wallets/Trust_wallet";
+import Connect_TrustWallet from "./wallets/Trust_wallet";
 
 function Main() {
   const theme = useTheme();
@@ -81,6 +85,9 @@ function Main() {
   const [open, setOpen] = useState(false);
   const [activeTab, setActiveTab] = useState("");
   const [value, setValue] = useState(-1);
+  const [connect_metaMask, setconnect_metaMask] = useState(false);
+  const [connect_trustWallet, setconnect_trustWallet] = useState(false);
+  const [connect_coinbase, setconnect_coinbase] = useState(false);
 
   const TabsContainer = styled.div`
     display: flex;
@@ -121,6 +128,28 @@ function Main() {
     navigate("/");
   };
 
+  const handle_metamask_connect = () => {
+    console.log("metamask");
+    setconnect_metaMask(true);
+    setconnect_coinbase(false);
+    setconnect_trustWallet(false);
+  };
+
+  const handle_trustWallet_connect = () => {
+    console.log("trustWallet");
+    setconnect_metaMask(false);
+    setconnect_coinbase(false);
+    setconnect_trustWallet(true);
+  };
+
+  const handle_coinbase_connect = () => {
+    console.log("coinbase");
+    setconnect_metaMask(false);
+    setconnect_coinbase(true);
+    setconnect_trustWallet(false);
+  };
+
+
   return (
     <div>
       <Paper
@@ -143,6 +172,8 @@ function Main() {
               zIndex: 100,
               position: "fixed",
               top: "23px",
+              background: "rgba(0, 0, 0, 0.40)", // Transparent background with 0.25 opacity
+              borderRadius: "20px",
             }}
           >
             <Grid
@@ -406,7 +437,7 @@ function Main() {
             }}
           >
             <img
-              src={logo_top}
+              src={footer_img}
               alt="logo"
               style={{ margin: "0px", cursor: "pointer", width: "55px" }}
               onClick={handleClick_Home}
@@ -479,7 +510,7 @@ function Main() {
           sx={{
             width: "100%",
             height: "100%",
-            backgroundImage:  `url(${swap_background})`,
+            backgroundImage: `url(${swap_background})`,
             backgroundSize: "cover",
             overflowY: "auto",
             margin: 0,
@@ -610,9 +641,9 @@ function Main() {
                   width: "400px",
                   background: `linear-gradient(to bottom, #391932, rgba(0, 0, 0, 0.6))`, // Gradient background
                   // bgcolor: "rgba(128, 0, 128, 0.6)", //purplish
-              // background: "rgba(0, 0, 0, 0.40)", // Transparent background with 0.25 opacity
+                  // background: "rgba(0, 0, 0, 0.40)", // Transparent background with 0.25 opacity
 
-                  borderRadius:"20px",
+                  borderRadius: "20px",
                   boxShadow: 24,
                   p: 4,
                 }}
@@ -623,8 +654,9 @@ function Main() {
                   sx={{
                     color: "white",
                     marginBottom: "16px",
-                    fontFamily: "Poppins",
+                    fontFamily: "Aclonica",
                     fontSize: "14px",
+                    textAlign: "center",
                   }}
                 >
                   Connect to a Wallet
@@ -652,7 +684,7 @@ function Main() {
                     { id: 1, name: "Metamask", logo: metamask_logo },
                     { id: 2, name: "Coinbase", logo: coinbase_logo },
                     { id: 3, name: "Trust Wallet", logo: trust_wallet_logo },
-                    { id: 4, name: "Binance", logo: binance_logo },
+                    // { id: 4, name: "Binance", logo: binance_logo },
                   ].map((wallet) => (
                     <Box
                       key={wallet.id}
@@ -668,26 +700,34 @@ function Main() {
                         backgroundColor: "#2C2C2C", // White background with opacity
                       }}
                     >
-                      <Box sx={{width:"50%", height:"100%", display:"flex", flexDirection:"row", justifyContent:"flex-start", alignItems:"center"}}>
-
-                      <img
-                        src={wallet.logo}
-                        alt={`${wallet.name} Logo`}
-                        style={{
-                          width: "35px",
-                          height: "70%",
-                          margin: "0px 10px",
-                        }}
-                      />
-                      <Typography
-                        style={{
-                          fontFamily: "Maragsa",
-                          fontSize: "14px",
-                          color: "#9E9D9D",
+                      <Box
+                        sx={{
+                          width: "50%",
+                          height: "100%",
+                          display: "flex",
+                          flexDirection: "row",
+                          justifyContent: "flex-start",
+                          alignItems: "center",
                         }}
                       >
-                        {wallet.name}
-                      </Typography>
+                        <img
+                          src={wallet.logo}
+                          alt={`${wallet.name} Logo`}
+                          style={{
+                            width: "35px",
+                            height: "70%",
+                            margin: "0px 10px",
+                          }}
+                        />
+                        <Typography
+                          style={{
+                            fontFamily: "Maragsa",
+                            fontSize: "14px",
+                            color: "#9E9D9D",
+                          }}
+                        >
+                          {wallet.name}
+                        </Typography>
                       </Box>
                       {/* <Button
                         variant="contained"
@@ -703,7 +743,20 @@ function Main() {
                       >
                         Connect
                       </Button> */}
-                      <Box sx={{width:"50%", height:"100%", display:"flex", justifyContent:"flex-end", alignItems:"center", marginRight:"10px"}}>
+                      <Box
+                        sx={{
+                          width: "50%",
+                          height: "100%",
+                          display: "flex",
+                          justifyContent: "flex-end",
+                          alignItems: "center",
+                          marginRight: "10px",
+                          cursor: "pointer",
+                        }}
+                        onClick={
+                          wallet.name === "Metamask" ? handle_metamask_connect : (wallet.name === "Coinbase" ? handle_coinbase_connect : handle_trustWallet_connect)
+                        }
+                      >
                         <button
                           style={{
                             background: "#50A883",
@@ -712,11 +765,10 @@ function Main() {
                             fontFamily: "Aclonica",
                             width: "100px",
                             height: "30px",
-
+                            cursor: "pointer",
                             color: "white",
                             fontSize: isSmScreen ? "11px" : "12px",
                           }}
-                          // onClick={() => handle_connect()}
                         >
                           Connect
                         </button>
@@ -724,6 +776,9 @@ function Main() {
                     </Box>
                   ))}
                 </Box>
+                {connect_metaMask ? <ConnectWallet /> : ""}
+                {connect_trustWallet ? <Connect_TrustWallet /> : ""}
+                {connect_coinbase ? <ConnectWallet /> : ""}
               </Box>
             </Modal>
             {/* ------------------------------------------------------------------------------------------------------------------- */}
