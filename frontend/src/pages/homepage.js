@@ -547,7 +547,7 @@ function Homepage({ callback }) {
                           color: "#ECF1F0",
                         }}
                       >
-                        ${(coinsData[0]?.price).toFixed(4) || "$43000"}
+                        ${(coinsData && coinsData[0] && coinsData[0].price) ? (coinsData[0]?.price).toFixed(4) : "43000"}
                       </Typography>
 
                       <Typography
@@ -559,7 +559,7 @@ function Homepage({ callback }) {
                           lineHeight: "1.2",
                         }}
                       >
-                        {(coinsData[0]?.change).toFixed(6) || "1.41"}%
+                        {(coinsData && coinsData[0] && coinsData[0].price) ? (coinsData[0]?.change).toFixed(6) : "1.41"}%
                         {/* 1.41% */}
                       </Typography>
                     </Grid>
@@ -622,7 +622,7 @@ function Homepage({ callback }) {
                           color: "#ECF1F0",
                         }}
                       >
-                        ${(coinsData[1]?.price).toFixed(4) || "$43000"}
+                        ${(coinsData && coinsData[0] && coinsData[0].price) ? (coinsData[1]?.price).toFixed(4) : "43000"}
                       </Typography>
 
                       <Typography
@@ -634,7 +634,7 @@ function Homepage({ callback }) {
                           lineHeight: "1.2",
                         }}
                       >
-                        {(coinsData[1]?.change).toFixed(6) || "1.41"}%
+                        {(coinsData && coinsData[0] && coinsData[0].price) ? (coinsData[1]?.change).toFixed(6) : "1.41"}%
                       </Typography>
                     </Grid>
                     <Grid item xs={6} sm={6} md={6} lg={6}>
@@ -696,7 +696,7 @@ function Homepage({ callback }) {
                           color: "#ECF1F0",
                         }}
                       >
-                        ${(coinsData[4]?.price).toFixed(4) || "$43000"}
+                        ${(coinsData && coinsData[0] && coinsData[0].price) ? (coinsData[4]?.price).toFixed(4) : "$43000"}
                       </Typography>
 
                       <Typography
@@ -708,7 +708,7 @@ function Homepage({ callback }) {
                           lineHeight: "1.2",
                         }}
                       >
-                        {(coinsData[0]?.change).toFixed(4) || "$43000"}%
+                        {(coinsData && coinsData[0] && coinsData[0].change) ? (coinsData[0]?.change).toFixed(4) : "$43000"}%
                       </Typography>
                     </Grid>
                     <Grid item xs={6} sm={6} md={6} lg={6}>
@@ -770,7 +770,7 @@ function Homepage({ callback }) {
                           color: "#ECF1F0",
                         }}
                       >
-                        ${(coinsData[2]?.price).toFixed(4) || "$43000"}
+                        ${(coinsData && coinsData[0] && coinsData[0].price) ?(coinsData[2]?.price).toFixed(4) : "$43000"}
                       </Typography>
 
                       <Typography
@@ -782,7 +782,7 @@ function Homepage({ callback }) {
                           lineHeight: "1.2",
                         }}
                       >
-                        {(coinsData[2]?.change).toFixed(4) || "$43000"}%
+                        {(coinsData && coinsData[0] && coinsData[0].change) ?(coinsData[2]?.change).toFixed(4) : "$43000"}%
                       </Typography>
                     </Grid>
                     <Grid item xs={6} sm={6} md={6} lg={6}>
@@ -1739,7 +1739,7 @@ function Homepage({ callback }) {
                                   color: "#fff",
                                 }}
                               >
-                                ${row.price.toFixed(5)}
+                                ${(row  && row.price) ? row.price.toFixed(5) : "$43000"}
                               </Typography>
                             </TableCell>
                             <TableCell>

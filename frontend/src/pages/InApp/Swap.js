@@ -398,7 +398,7 @@ function Swap_function() {
                                 margin: "0px 0px 0px 3px",
                               }}
                             >
-                              ${menuItem.price.toFixed(2)|| "49000"}
+                              ${(menuItem && menuItem.price) ? menuItem.price.toFixed(2): "49000"}
                             </Typography>
                           </Grid>
                         </Grid>
@@ -500,7 +500,7 @@ function Swap_function() {
                   // margin: "5px",
                 }}
               >
-                {((coinSelected.price/coinSelected2.price).toFixed(8) * userInput) || "9000"}
+                {(coinSelected.price && coinSelected2.price) ? ((coinSelected.price/coinSelected2.price).toFixed(8) * userInput) : "9000"}
                 {/* {coinSelected.price > coinSelected2.price ? (coinSelected.price/coinSelected2.price).toFixed(4) * userInput: (coinSelected2.price/coinSelected.price).toFixed(4) * userInput} */}
 
               </Typography>
@@ -588,7 +588,7 @@ function Swap_function() {
                                 // color: "#9E9D9D",
                               }}
                             >
-                              ${menuItem.price.toFixed(2) || "49000"}
+                              ${(menuItem && menuItem.price) ? menuItem.price.toFixed(2) : "49000"}
                             </Typography>
                           </Grid>
                         </Grid>
@@ -631,7 +631,7 @@ function Swap_function() {
                     width: "80%",
                   }}
                 >
-                  1 {coinSelected.symbol || "BTC"} = {((coinSelected.price/coinSelected2.price).toFixed(8)) || "49000"}{" "}
+                  1 {(coinSelected && coinSelected.symbol) ? coinSelected.symbol : "BTC"} = {(coinSelected2.price && coinSelected.price) ? ((coinSelected.price/coinSelected2.price).toFixed(8)) : "49000"}{" "}
                   {coinSelected2.symbol}
                 </Typography>
               </Grid>

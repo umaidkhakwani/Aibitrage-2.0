@@ -458,7 +458,7 @@ function Bridge_function() {
                                         margin: "0px 0px 0px 3px",
                                       }}
                                     >
-                                      ${menuItem.price.toFixed(8) || "49000"}
+                                      ${(menuItem && menuItem.price) ? menuItem.price.toFixed(8) : "49000"}
                                     </Typography>
                                   </Grid>
                                 </Grid>
@@ -575,7 +575,7 @@ function Bridge_function() {
                                         margin: "0px 0px 0px 3px",
                                       }}
                                     >
-                                      ${menuItem.price.toFixed(2) || "49000"}
+                                      ${(menuItem && menuItem.price) ? menuItem.price.toFixed(2) : "49000"}
                                     </Typography>
                                   </Grid>
                                 </Grid>
@@ -836,7 +836,7 @@ function Bridge_function() {
                                         margin: "0px 0px 0px 3px",
                                       }}
                                     >
-                                      ${menuItem.price.toFixed(8) || "49000"}
+                                      ${(menuItem && menuItem.price) ? menuItem.price.toFixed(8) : "49000"}
                                     </Typography>
                                   </Grid>
                                 </Grid>
@@ -1031,7 +1031,7 @@ function Bridge_function() {
                     margin: "5px 0px 0px 5px",
                   }}
                 >
-                  ${coinSelected3.price?.toFixed(8) || "-"}
+                  ${(coinSelected3 && coinSelected3.price) ? coinSelected3.price?.toFixed(8) : "-"}
                 </Typography>
               </Box>
             </Container>
