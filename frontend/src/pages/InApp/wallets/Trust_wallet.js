@@ -1,63 +1,170 @@
+// import { Box, Typography } from '@mui/material';
+// import React, { useState, useEffect } from 'react';
+// import { Web3Provider } from '@ethersproject/providers';
+// import { formatEther } from '@ethersproject/units';
+// import { XrpProvider } from 'xrp-library'; // Example import for XRP
+// import { BtcProvider } from 'btc-library'; // Example import for BTC
+// import { UsdtProvider } from 'usdt-library'; // Example import for USDT
+// import "../../../fonts/fonts.css";
+
+// const Connect_TrustWallet = () => {
+//   const [account, setAccount] = useState(null);
+//   const [ethBalance, setEthBalance] = useState(null);
+//   const [xrpBalance, setXrpBalance] = useState(null);
+//   const [usdtBalance, setUsdtBalance] = useState(null);
+//   const [btcBalance, setBtcBalance] = useState(null);
+
+//   useEffect(() => {
+//     // Connect to the available Ethereum provider
+//     connectToEthereumProvider();
+//     // Connect to the XRP, USDT, and BTC providers
+//     connectToXrpProvider();
+//     connectToUsdtProvider();
+//     connectToBtcProvider();
+//   }, []);
+
+//   const connectToEthereumProvider = async () => {
+//     // ... (your existing Ethereum connection code)
+//   };
+
+//   const connectToXrpProvider = async () => {
+//     try {
+//       // Assuming XrpProvider has a similar interface to Web3Provider
+//       const xrpProvider = new XrpProvider();
+//       const xrpAccount = await xrpProvider.getAccount();
+//       const xrpBalance = await xrpProvider.getBalance(xrpAccount);
+//       setXrpBalance(xrpBalance);
+//     } catch (error) {
+//       console.error('Error connecting to XRP provider:', error.message);
+//     }
+//   };
+
+//   const connectToUsdtProvider = async () => {
+//     try {
+//       // Assuming UsdtProvider has a similar interface to Web3Provider
+//       const usdtProvider = new UsdtProvider();
+//       const usdtAccount = await usdtProvider.getAccount();
+//       const usdtBalance = await usdtProvider.getBalance(usdtAccount);
+//       setUsdtBalance(usdtBalance);
+//     } catch (error) {
+//       console.error('Error connecting to USDT provider:', error.message);
+//     }
+//   };
+
+//   const connectToBtcProvider = async () => {
+//     try {
+//       // Assuming BtcProvider has a similar interface to Web3Provider
+//       const btcProvider = new BtcProvider();
+//       const btcAccount = await btcProvider.getAccount();
+//       const btcBalance = await btcProvider.getBalance(btcAccount);
+//       setBtcBalance(btcBalance);
+//     } catch (error) {
+//       console.error('Error connecting to BTC provider:', error.message);
+//     }
+//   };
+
+//   const backgroundColor = account ? 'rgba(80, 168, 131, 0.7)' : 'rgba(255, 61, 61, 0.6)';
+
+//   return (
+//     <Box sx={{
+//       background: backgroundColor,
+//       padding: "10px",
+//       borderRadius: "10px",
+//     }}>
+//       {account ? (
+//         <Box>
+//           <Typography sx={{ fontFamily: "Aclonica", fontSize: "11px", color: "#FFFAFA" }}>Connected! Your account: {account}</Typography>
+//           <Typography sx={{ fontFamily: "Aclonica", fontSize: "14px", color: "#FFFAFA" }}>ETH Balance: {ethBalance} ETH</Typography>
+//           <Typography sx={{ fontFamily: "Aclonica", fontSize: "14px", color: "#FFFAFA" }}>XRP Balance: {xrpBalance} XRP</Typography>
+//           <Typography sx={{ fontFamily: "Aclonica", fontSize: "14px", color: "#FFFAFA" }}>USDT Balance: {usdtBalance} USDT</Typography>
+//           <Typography sx={{ fontFamily: "Aclonica", fontSize: "14px", color: "#FFFAFA" }}>BTC Balance: {btcBalance} BTC</Typography>
+//         </Box>
+//       ) : (
+//         <Typography sx={{ fontFamily: "Aclonica", fontSize: "12px", color: "#FFFAFA" }}>Connecting...</Typography>
+//       )}
+//     </Box>
+//   );
+// };
+
+// export default Connect_TrustWallet;
+
+
+
+// Import necessary modules and components
+
 import { Box, Typography } from '@mui/material';
 import React, { useState, useEffect } from 'react';
-import { Web3Provider } from '@ethersproject/providers'; // Updated import for provider
-import { formatEther } from '@ethersproject/units'; // Updated import for formatEther
+import Web3 from 'web3';
+import { Networks, useIsConnected, XRPLClient, useBalance, useWalletAddress, useWallet } from "@nice-xrpl/react-xrpl";
+
 import "../../../fonts/fonts.css";
 
+function Connect_TrustWallet () {
+    const [account, setAccount] = useState(null);
+    const [xrpBalance, setXrpBalance] = useState(null);
 
-const Connect_TrustWallet = () => {
-  const [account, setAccount] = useState(null);
-  const [balance, setBalance] = useState(null);
+    // Make sure useBalance is properly defined or imported
+    // const getXrpBalance = async (xrpAccount) => {
+    //     const xrpBalance =  useBalance(); // Correct the function call  
+    // };
+    const isConnected = useIsConnected();
+    const address = useWalletAddress();
+    const wallet = useWallet();
+    // const balance = useBalance();
 
-  useEffect(() => {
-    // Connect to the available Ethereum provider
-    connectToEthereumProvider();
-  }, []);
 
-  const connectToEthereumProvider = async () => {
-    try {
-      // Check for the MetaMask provider
-      if (window.ethereum) {
-        await window.ethereum.request({ method: 'eth_requestAccounts' });
-        const web3 = new Web3Provider(window.ethereum); // Updated provider creation
-        await connectToWallet(web3);
-      } else if (window.web3) {
-        const web3 = new Web3Provider(window.web3.currentProvider); // Updated provider creation
-        await connectToWallet(web3);
-      } else {
-        console.error('No Ethereum provider detected');
-      }
-    } catch (error) {
-      console.error('Error connecting to Ethereum provider:', error.message);
-    }
-  };
+    useEffect(() => {
+        const connectToTrustWallet = async () => {
+            if (window.ethereum) {
+                try {
+                    await window.ethereum.request({ method: 'eth_requestAccounts' });
+                    const web3 = new Web3(window.ethereum);
+                    const accounts = await web3.eth.getAccounts();
+                    setAccount(accounts[0]);
 
-  const connectToWallet = async (web3) => {
-    const accounts = await web3.listAccounts();
-    setAccount(accounts[0]);
-    const ethBalance = await web3.getBalance(accounts[0]);
-    const etherBalance = formatEther(ethBalance); // Updated formatEther usage
-    setBalance(etherBalance);
-  };
+                    // Retrieve XRP balance using @nice-xrpl/react-xrpl
+                    const xrpAccount = "rwEDihU9dQ15voWEAHse2hvRPR9xJw9tvN";
+                    console.log("Connected", isConnected);
+                    console.log("address", address);
+                    console.log("wallet", wallet.seed);
+                    // console.log("balance", balance);
+                    // setXrpBalance(await getXrpBalance(xrpAccount));
+                } catch (error) {
+                    console.error('Error connecting to TrustWallet:', error.message);
+                }
+            } else {
+                console.error('TrustWallet is not installed');
+                
+            }
+        };
 
-  const backgroundColor = account ? 'rgba(80, 168, 131, 0.7)' : 'rgba(255, 61, 61, 0.6)';
+        connectToTrustWallet();
+    }, []);
 
-  return (
-    <Box sx={{
-      background: backgroundColor,
-      padding: "10px",
-      borderRadius: "10px",
-    }}>
-      {account ? (
-        <Box>
-          <Typography sx={{ fontFamily: "Aclonica", fontSize: "11px", color: "#FFFAFA" }}>Connected! Your account: {account}</Typography>
-          <Typography sx={{ fontFamily: "Aclonica", fontSize: "14px", color: "#FFFAFA" }}>Balance: {balance} ETH</Typography>
+    const backgroundColor = account ? 'rgba(80, 168, 131, 0.7)' : 'rgba(255, 61, 61, 0.6)';
+
+    return (
+        <Box sx={{
+            background: backgroundColor,
+            padding: "10px",
+            borderRadius: "10px",
+        }}>
+            {account ? (
+                <Box>
+                    <Typography sx={{ fontFamily: "Aclonica", fontSize: "11px", color: "#FFFAFA" }}>
+                        Connected to TrustWallet! Your account: {account}
+                    </Typography>
+                    <Typography sx={{ fontFamily: "Aclonica", fontSize: "14px", color: "#FFFAFA" }}>
+                        Balance (XRP): {xrpBalance} XRP
+                    </Typography>
+                </Box>
+            ) : (
+                <Typography sx={{ fontFamily: "Aclonica", fontSize: "12px", color: "#FFFAFA" }}>
+                    Connecting to TrustWallet...
+                </Typography>
+            )}
         </Box>
-      ) : (
-        <Typography sx={{ fontFamily: "Aclonica", fontSize: "12px", color: "#FFFAFA" }}>Connecting...</Typography>
-      )}
-    </Box>
-  );
+    );
 };
 
 export default Connect_TrustWallet;

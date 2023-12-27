@@ -5,16 +5,12 @@ import {
   Container,
   CssBaseline,
   Grid,
-  IconButton,
-  Menu,
-  MenuItem,
   Paper,
   Tab,
   Tabs,
   Typography,
 } from "@mui/material";
 import LockIcon from "@mui/icons-material/Lock";
-import MenuIcon from "@mui/icons-material/Menu";
 import logo_top from "./images/logo_top1.svg";
 
 import bg1 from "./images/background1.png";
@@ -60,16 +56,6 @@ function Header_Function() {
   const [activeTab, setActiveTab] = useState("");
   const [app_active, set_App_active] = useState(true);
 
-  const [anchorEl, setAnchorEl] = useState(null);
-
-  const handleMenuClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleMenuClose = () => {
-    setAnchorEl(null);
-  };
-
   const TabsContainer = styled.div`
     display: flex;
     overflow-x: auto;
@@ -78,7 +64,7 @@ function Header_Function() {
     background-color: transparent;
     margin: ${({ isSmScreen }) => (isSmScreen ? "20px 0px 0px 0px" : "0px")};
     width: ${({ isSmScreen }) =>
-      isSmScreen ? "90%" : "100%"}; /* Ensure the tabs take the full width */
+      isSmScreen ? "90%" : "60%"}; /* Ensure the tabs take the full width */
   `;
 
   const TabItem = styled.div`
@@ -112,14 +98,11 @@ function Header_Function() {
 
   const handleChange = (event, newValue) => {
     console.log("newValue", newValue);
-    if (newValue > 0 && newValue < 4) {
-      setActiveTab("");
+    setValue(newValue);
+    if (newValue > -1 && newValue < 6) {
+      setActiveTab(getTabName(newValue));
     } else {
-      console.log("newValue2", newValue);
-      setValue(newValue);
-      if (newValue > -1 && newValue < 6) {
-        setActiveTab(getTabName(newValue));
-      }
+      setActiveTab("");
     }
   };
 
@@ -238,144 +221,82 @@ function Header_Function() {
                 }}
               />
             </Grid>
-
-            {/* ----------------------------------------  TABS ----------------------------------------------------------             */}
-
             <Grid
               item
-              xs={6}
-              sm={6}
+              xs={12}
+              sm={12}
               md={9}
               lg={9}
               xl={9}
               sx={{
                 display: "flex",
-                justifyContent: isMdScreen ? "flex-start" : "center",
+                justifyContent: "center",
                 alignItems: "center",
               }}
             >
-              {isMdScreen ? (
-                <>
-                  <IconButton onClick={handleMenuClick} size="large">
-                    {/* Replace 'YourIconComponent' with your desired icon component */}
-                    <MenuIcon
-                      style={{
-                        borderRadius: "20px",
-                        fontSize: "35px",
-                        padding: "5px",
-                        background:
-                          "linear-gradient(101deg, #1F8EBE -5.36%, #440495 29.46%, #440495 56.03%, #B102CD 81.92%)",
-                        color: "#ECF1F0",
-                      }}
-                    />
-                  </IconButton>
-                  <Menu
-                    anchorEl={anchorEl}
-                    open={Boolean(anchorEl)}
-                    onClose={handleMenuClose}
-                    PaperProps={{
-                      style: {
-                        width: "98%",
-                        backgroundColor: "rgba(0, 0, 0, 0.7)",
-                        color: "#50A883",
-                        position: "relative",
-                        left: "0px",
-                      },
-                    }}
-                  >
-                    {[0, 1, 2, 3, 4, 5].map((index) => (
-                      <MenuItem
-                        key={index}
-                        sx={{
-                          display: "flex",
-                          justifyContent: "center", // Adjusted to place lock icon to the right
-                          alignItems: "center",
-                          flexDirection: "row", // Set flexDirection to row
-                          fontFamily: "Aclonica", // Set the fontFamily to Poppins
-                          padding: "10px", // Added padding for better spacing
-                        }}
-                        onClick={() => handleChange(null, index)}
-                      >
-                        <div>{getTabName(index)}</div>
-                        {(index === 1 || index === 3 || index === 2) && (
-                          <LockIcon style={{ color: "#50A883" }} />
-                        )}
-                      </MenuItem>
-                    ))}
-                  </Menu>
-                </>
-              ) : (
-                <TabsContainer isSmScreen={isSmScreen}>
-                  <TabItem
-                    selected={activeTab === "Blogs"}
-                    onClick={() => handleChange(null, 0)}
-                  >
-                    Blogs
-                  </TabItem>
-                  <TabItem
-                    selected={activeTab === "Swap"}
-                    disabled={true}
-                    onClick={() => handleChange(null, 1)}
-                  >
-                    Swap
-                    {/** Lock icon for the disabled "Swap" tab */}
-                    {/* {activeTab === "Swap" && ( */}
-                      <LockIconContainer>
-                        <LockIcon />
-                      </LockIconContainer>
-                    {/* )} */}
-                  </TabItem>
-                  <TabItem
-                    selected={activeTab === "Pool"}
-                    disabled={true}
-                    onClick={() => handleChange(null, 2)}
-                  >
-                    Pool
+              <TabsContainer isSmScreen={isSmScreen}>
+                <TabItem
+                  selected={activeTab === "Blogs"}
+                  onClick={() => handleChange(null, 0)}
+                >
+                  Blogs
+                </TabItem>
+                <TabItem
+                  selected={activeTab === "Swap"}
+                  disabled={true}
+                  onClick={() => handleChange(null, 1)}
+                >
+                  Swap
+                  {/** Lock icon for the disabled "Swap" tab */}
+                  {activeTab === "Swap" && (
                     <LockIconContainer>
-                        <LockIcon />
-                      </LockIconContainer>
-                  </TabItem>
-                  <TabItem
-                    selected={activeTab === "Bridge"}
-                    disabled={true}
-                    onClick={() => handleChange(null, 3)}
-                  >
-                    Bridge
-                    {/** Lock icon for the disabled "Bridge" tab */}
-                    {/* {activeTab === "Bridge" && ( */}
-                      <LockIconContainer>
-                        <LockIcon />
-                      </LockIconContainer>
-                    {/* )} */}
-                  </TabItem>
-                  <TabItem
-                    selected={activeTab === "Docs"}
-                    onClick={() => handleChange(null, 4)}
-                  >
-                    Docs
-                  </TabItem>
-                  <TabItem
-                    selected={activeTab === "Forum"}
-                    onClick={() => handleChange(null, 5)}
-                  >
-                    Forum
-                  </TabItem>
-                </TabsContainer>
-              )}
+                      <LockIcon />
+                    </LockIconContainer>
+                  )}
+                </TabItem>
+                <TabItem
+                  selected={activeTab === "Pool"}
+                  onClick={() => handleChange(null, 2)}
+                >
+                  Pool
+                </TabItem>
+                <TabItem
+                  selected={activeTab === "Bridge"}
+                  disabled={true}
+                  onClick={() => handleChange(null, 3)}
+                >
+                  Bridge
+                  {/** Lock icon for the disabled "Bridge" tab */}
+                  {activeTab === "Bridge" && (
+                    <LockIconContainer>
+                      <LockIcon />
+                    </LockIconContainer>
+                  )}
+                </TabItem>
+                <TabItem
+                  selected={activeTab === "Docs"}
+                  onClick={() => handleChange(null, 4)}
+                >
+                  Docs
+                </TabItem>
+                <TabItem
+                  selected={activeTab === "Forum"}
+                  onClick={() => handleChange(null, 5)}
+                >
+                  Forum
+                </TabItem>
+              </TabsContainer>
             </Grid>
-
-            {/* ----------------------------------------------------------------------------------------------------------------             */}
-
             <Grid
               item
-              xs={6}
-              sm={6}
+              xs={12}
+              sm={12}
               md={2}
               lg={2}
               xl={2}
               sx={{
                 display: "flex",
-                justifyContent: isMdScreen ? "flex-end" : "center",
+                justifyContent: "center",
                 alignItems: "center",
               }}
             >
@@ -384,19 +305,18 @@ function Header_Function() {
                   // position: "absolute",
                   // top: "30px",
                   // right: "40px",
-                  width: isMdScreen ? "100px" : "130px",
-                  height: isMdScreen ? "30px" : "40px", // Set the height to match the image height
+                  width: "130px",
+                  height: "40px", // Set the height to match the image height
                   border: "none",
                   borderRadius: "15px",
-                  marginTop: "10px",
-                  marginRight: isMdScreen ? "10px" : "0px",
+                  marginTop: "20px",
                   background:
                     "linear-gradient(101deg, #1F8EBE -5.36%, #440495 29.46%, #440495 56.03%, #B102CD 81.92%)",
                   color: "#fff",
                   cursor: "pointer",
                   textDecoration: "none",
                   transition: "background 0.3s ease",
-                  fontSize: isMdScreen ? "11px" : "14px",
+                  fontSize: "14px",
                   zIndex: 101,
                 }}
                 onClick={handleClick}

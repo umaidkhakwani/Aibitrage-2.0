@@ -399,7 +399,7 @@ function Homepage({ callback }) {
                       border: "none",
                       borderRadius: "10px",
                       background:
-                        "linear-gradient(95deg, #9ADBEC 0%, #9F9ADB 58.45%, #A27BD3 90.51%)",
+                      "linear-gradient(101deg, #1F8EBE -5.36%, #440495 29.46%, #440495 56.03%, #B102CD 81.92%)",
                       color: "#fff",
                       fontSize: "16px",
                       cursor: "pointer",
@@ -1277,7 +1277,7 @@ function Homepage({ callback }) {
                         them in the one place.
                       </Typography>
                     </Grid>
-                    <Grid item xs={12} sm={12} md={12} lg={12}>
+                    {/* <Grid item xs={12} sm={12} md={12} lg={12}>
                       <Box
                         sx={{
                           width: "100%",
@@ -1302,7 +1302,7 @@ function Homepage({ callback }) {
                           sx={{ marginLeft: "5px", color: "#0FAE96" }}
                         />
                       </Box>
-                    </Grid>
+                    </Grid> */}
                   </Grid>
                 </Container>
               </Grid>
@@ -1373,7 +1373,7 @@ function Homepage({ callback }) {
                         maximum of $250,000.
                       </Typography>
                     </Grid>
-                    <Grid item xs={12} sm={12} md={12} lg={12}>
+                    {/* <Grid item xs={12} sm={12} md={12} lg={12}>
                       <Box
                         sx={{
                           width: "100%",
@@ -1398,7 +1398,7 @@ function Homepage({ callback }) {
                           sx={{ marginLeft: "5px", color: "#0FAE96" }}
                         />
                       </Box>
-                    </Grid>
+                    </Grid> */}
                   </Grid>
                 </Container>
               </Grid>
@@ -1469,7 +1469,7 @@ function Homepage({ callback }) {
                         currencies and always uptodate.
                       </Typography>
                     </Grid>
-                    <Grid item xs={12} sm={12} md={12} lg={12}>
+                    {/* <Grid item xs={12} sm={12} md={12} lg={12}>
                       <Box
                         sx={{
                           width: "100%",
@@ -1494,7 +1494,7 @@ function Homepage({ callback }) {
                           sx={{ marginLeft: "5px", color: "#0FAE96" }}
                         />
                       </Box>
-                    </Grid>
+                    </Grid> */}
                   </Grid>
                 </Container>
               </Grid>
@@ -1565,7 +1565,7 @@ function Homepage({ callback }) {
                         newbie.
                       </Typography>
                     </Grid>
-                    <Grid item xs={12} sm={12} md={12} lg={12}>
+                    {/* <Grid item xs={12} sm={12} md={12} lg={12}>
                       <Box
                         sx={{
                           width: "100%",
@@ -1590,7 +1590,7 @@ function Homepage({ callback }) {
                           sx={{ marginLeft: "5px", color: "#0FAE96" }}
                         />
                       </Box>
-                    </Grid>
+                    </Grid> */}
                   </Grid>
                 </Container>
               </Grid>

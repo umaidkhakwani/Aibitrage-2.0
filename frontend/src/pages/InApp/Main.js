@@ -23,6 +23,8 @@ import {
   Typography,
 } from "@mui/material";
 
+import { XRPLClient } from '@nice-xrpl/react-xrpl';
+
 import animation6 from "../../images/animation6.gif";
 import bg3 from "../../images/app_bg.gif";
 import sidebar from "../../images/sidebar.png";
@@ -40,7 +42,7 @@ import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import logo_top from "../../images/logo_top.png";
 import app_sidebar from "../../images/app_sidebar.gif";
-import footer_img from "../../images/footer.png";
+import footer_img from "../../images/footer.svg";
 
 import inApp from "../../images/inApp.svg";
 import swap_background from "../../images/swap_background.svg";
@@ -777,7 +779,9 @@ function Main() {
                   ))}
                 </Box>
                 {connect_metaMask ? <ConnectWallet /> : ""}
+                <XRPLClient>
                 {connect_trustWallet ? <Connect_TrustWallet /> : ""}
+                </XRPLClient>
                 {connect_coinbase ? <ConnectWallet /> : ""}
               </Box>
             </Modal>

@@ -78,7 +78,8 @@ function Bridge_function() {
     const nameAndPriceArray = [];
 
     axios
-    .get("http://194.163.45.79:3001/api/api/cryptocurrency")
+    // .get("http://194.163.45.79:3001/api/cryptocurrency")
+    .get("http://localhost:3001/api/cryptocurrency")
       .then((response) => {
         const data = response.data;
         data.data.forEach((coin) => {

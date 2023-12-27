@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Container, Grid, Paper, Typography } from "@mui/material";
-import footer_img from "../images/footer.png";
+import footer_img from "../images/footer.svg";
 import Telegram from "../images/Telegram.png";
 import Discord from "../images/Discord.png";
 import Gitbook from "../images/Gitbook.png";
@@ -62,7 +62,10 @@ function FooterFunction_home({ callback2 }) {
             }}
           >
             <img
-              src={footer_img}
+              src={footer_img
+              
+              
+              }
               alt="footer"
               style={{ margin: "0px auto", height: "120px" }}
             />

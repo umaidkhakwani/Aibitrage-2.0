@@ -58,7 +58,7 @@ const Launch_App_ModalComponent = () => {
       <Typography
         sx={{
           color: "#FFF",
-          fontFamily: "Lora",
+          fontFamily: "Aclonica",
           fontSize: "38px",
           fontStyle: "normal",
           textAlign: "center",
