@@ -22,12 +22,22 @@ import coin1 from "../../images/coin1.png";
 import pool_left_ring from "../../images/pool_left_ring.svg";
 import pool_right_ring from "../../images/pool_right_ring.svg";
 
+import ring_1 from "../../images/ring_1.svg";
+import ring_2 from "../../images/ring_2.svg";
+import ring_3 from "../../images/ring_3.svg";
+import ring_4 from "../../images/ring_4.svg";
+
+import pool_vid from "../../images/pool_vid.mp4";
+import pool_vid_gif from "../../images/pool_vid.gif";
+import pool_details from "../../images/vid_details.svg";
+
 import pool1_graph from "../../images/pool1_graph.png";
 import pool2_graph from "../../images/pool2_graph.png";
 import pool3_graph from "../../images/pool3_graph.png";
 import pool4_graph from "../../images/pool4_graph.png";
 
 import pool_chart from "../../images/pool_chart.svg";
+import LockIcon from "@mui/icons-material/Lock";
 
 import "../../fonts/fonts.css";
 
@@ -55,7 +65,7 @@ function Pool_function() {
       sx={{
         width: "80%",
         height: "100%",
-        marginTop: isSmScreen?"250px":"170px",
+        marginTop: isSmScreen ? "250px" : "0px",
         display: "flex",
         // justifyContent: "center",
         flexDirection: "column",
@@ -89,7 +99,7 @@ function Pool_function() {
           />
         </div>
       ) : null}
-      <Box sx={{ width: "90%", height: "100%" }}>
+      {/* <Box sx={{ width: "90%", height: "100%" }}>
         <Typography
           sx={{
             fontFamily: "Aclonica",
@@ -277,7 +287,7 @@ function Pool_function() {
           returns, ensuring a tailored staking experience. Below is an in-depth
           examination of each pool:
         </Typography>
-      </Box>
+      </Box> */}
       <Box
         sx={{
           width: "95%",
@@ -300,6 +310,18 @@ function Pool_function() {
               <Table>
                 <TableBody>
                   <TableRow>
+                    <TableCell>
+                      <Typography
+                        variant="h6"
+                        sx={{
+                          fontFamily: "Poppins",
+                          fontSize: "14px",
+                          color: "#50A883",
+                        }}
+                      >
+                        Pool
+                      </Typography>
+                    </TableCell>
                     <TableCell>
                       <Typography
                         variant="h6"
@@ -336,7 +358,7 @@ function Pool_function() {
                         ROI
                       </Typography>
                     </TableCell>
-                    <TableCell>
+                    {/* <TableCell>
                       <Typography
                         variant="h6"
                         sx={{
@@ -347,7 +369,7 @@ function Pool_function() {
                       >
                         Graph
                       </Typography>
-                    </TableCell>
+                    </TableCell> */}
                     <TableCell>
                       <Typography
                         variant="h6"
@@ -367,28 +389,28 @@ function Pool_function() {
                       investment: "0.5%",
                       ROI: "0.65",
                       percentageChange: "+1.68%",
-                      graph: pool1_graph,
+                      graph: ring_1,
                     },
                     {
                       name: "The Advanced Arbitrage Pool",
                       investment: "0.75%",
                       ROI: "1",
                       percentageChange: "+1.68%",
-                      graph: pool2_graph,
+                      graph: ring_2,
                     },
                     {
                       name: "The Diversified Assets Pool",
                       investment: "1%",
                       ROI: "1.5",
                       percentageChange: "+1.68%",
-                      graph: pool3_graph,
+                      graph: ring_3,
                     },
                     {
                       name: "The High Roller Pool",
                       investment: "1.5%",
                       ROI: "2",
                       percentageChange: "+1.68%",
-                      graph: pool4_graph,
+                      graph: ring_4,
                     },
                   ].map((row, index) => (
                     <TableRow
@@ -397,6 +419,13 @@ function Pool_function() {
                         borderBottom: "2px solid #2B2C3B", // Set the color of the bottom border
                       }}
                     >
+                      <TableCell>
+                        <img
+                          src={row.graph}
+                          alt={`Image for ${row.name}`}
+                          style={{ width: "60px" }}
+                        />
+                      </TableCell>
                       <TableCell>
                         <Typography
                           variant="h6"
@@ -427,19 +456,19 @@ function Pool_function() {
                           sx={{
                             fontFamily: "Poppins",
                             fontSize: "14px",
-                            color: "#fff",
+                            color: "#50A883",
                           }}
                         >
-                          {row.ROI}
+                          {row.ROI}%
                         </Typography>
                       </TableCell>
-                      <TableCell>
+                      {/* <TableCell>
                         <img
                           src={row.graph}
                           alt={`Image for ${row.name}`}
                           style={{ width: "125px" }}
                         />
-                      </TableCell>
+                      </TableCell> */}
                       <TableCell>
                         <Box
                           sx={{
@@ -448,6 +477,7 @@ function Pool_function() {
                             flexDirection: "row",
                             marginTop: "10px",
                             justifyContent: "center",
+                            alignItems: "center",
                           }}
                         >
                           <button
@@ -466,6 +496,7 @@ function Pool_function() {
                           >
                             Add Liquidity
                           </button>
+                          <LockIcon style={{ color: "#B102CD" }} />
                         </Box>
                       </TableCell>
                     </TableRow>
@@ -477,13 +508,24 @@ function Pool_function() {
         </Container>
       </Box>
 
-      <Box sx={{display:"flex", justifyContent:"center", alignItems:"center"}}>
+      <Box
+        sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+      >
         <img
-          src={pool_chart}
+          src={pool_vid_gif}
           alt="pool chart"
-          style={{ width: "325px", margin:"40px 0px" }}
+          style={{ width: "300px", margin: "20px 0px" }}
+        />
+        <img
+          src={pool_details}
+          alt="pool chart"
+          style={{ width: "300px", margin: "20px 0px" }}
         />
       </Box>
+      {/* <video width="350px" height="auto" controls>
+        <source src={pool_vid} type="video/mp4" />
+        Your browser does not support the video tag.
+      </video> */}
     </Box>
   );
 }

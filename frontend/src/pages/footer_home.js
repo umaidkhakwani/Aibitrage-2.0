@@ -198,6 +198,21 @@ function FooterFunction_home({ callback2 }) {
                 >
                   Trade/Swap
                   <br />
+                </Typography>
+                <Typography
+                  variant="h6"
+                  sx={{
+                    fontFamily: "Lora",
+                    fontSize: isSmScreen ? "16px" : "20px",
+
+                    color: "white",
+                    lineHeight: "1.2",
+                    cursor: "pointer",
+                    textAlign: "center",
+                    // textDecoration: "underline",
+                  }}
+                  onClick={() => handleclick(13)}
+                >
                   Investor’s Pools
                   <br />
                 </Typography>
@@ -258,7 +273,7 @@ function FooterFunction_home({ callback2 }) {
                     textAlign: "center",
                     cursor: "pointer",
                   }}
-                  onClick={() => handleclick(13)}
+                  onClick={() => handleclick(14)}
                 >
                   Bug Bounty
                   <br />
@@ -297,15 +312,29 @@ function FooterFunction_home({ callback2 }) {
                     fontFamily: "Lora",
                     fontSize: isSmScreen ? "16px" : "20px",
                     color: "white",
-                    textAlign: "center",
                     lineHeight: "1.2",
+                    textAlign: "center",
                   }}
                 >
                   Gitbook
                   <br />
-                  Telegram
+                  <a
+                    href="https://t.me/bitrageai"
+                    target="_blank" // Open link in a new tab
+                    rel="noopener noreferrer" // Security best practice for opening links in a new tab
+                    style={{ color: "inherit", textDecoration: "none" }}
+                  >
+                    Telegram
+                  </a>
                   <br />
-                  Twitter
+                  <a
+                    href="https://x.com/bitrageai"
+                    target="_blank" // Open link in a new tab
+                    rel="noopener noreferrer" // Security best practice for opening links in a new tab
+                    style={{ color: "inherit", textDecoration: "none" }}
+                  >
+                    X
+                  </a>
                   <br />
                 </Typography>
               </Grid>
@@ -377,7 +406,7 @@ function FooterFunction_home({ callback2 }) {
               }}
             >
               Copyright 2023. All Rights Reserved. Designed and Developed by
-              Meptics ltd.
+              AIBITRAGE Team.
             </Typography>
           </Grid>
         </Grid>

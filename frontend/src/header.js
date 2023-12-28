@@ -43,6 +43,7 @@ import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import styled from "styled-components";
 import Launch_App_ModalComponent from "./pages/Launch_App_modal";
+import Pool_Details from "./pages/pool_details";
 
 const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
 
@@ -100,8 +101,8 @@ function Header_Function() {
 
   const LockIconContainer = styled.div`
     position: absolute;
-    top: 5px;
-    right: 5px;
+    top: 8px;
+    right: -2px;
   `;
 
   const handleTabClick = (tab) => {
@@ -138,7 +139,7 @@ function Header_Function() {
 
   const getTabName = (index) => {
     // Map index to tab names based on your logic
-    const tabNames = ["Blogs", "Swap", "Pool", "Bridge", "Docs", "Forum"];
+    const tabNames = ["About", "Swap", "Pool", "Bridge", "Docs", "Whitepaper"];
     return tabNames[index];
   };
 
@@ -307,10 +308,10 @@ function Header_Function() {
               ) : (
                 <TabsContainer isSmScreen={isSmScreen}>
                   <TabItem
-                    selected={activeTab === "Blogs"}
+                    selected={activeTab === "About"}
                     onClick={() => handleChange(null, 0)}
                   >
-                    Blogs
+                    About
                   </TabItem>
                   <TabItem
                     selected={activeTab === "Swap"}
@@ -320,9 +321,9 @@ function Header_Function() {
                     Swap
                     {/** Lock icon for the disabled "Swap" tab */}
                     {/* {activeTab === "Swap" && ( */}
-                      <LockIconContainer>
-                        <LockIcon />
-                      </LockIconContainer>
+                    <LockIconContainer>
+                      <LockIcon sx={{ color: "#50A883" }} />
+                    </LockIconContainer>
                     {/* )} */}
                   </TabItem>
                   <TabItem
@@ -332,8 +333,8 @@ function Header_Function() {
                   >
                     Pool
                     <LockIconContainer>
-                        <LockIcon />
-                      </LockIconContainer>
+                      <LockIcon sx={{ color: "#50A883" }} />
+                    </LockIconContainer>
                   </TabItem>
                   <TabItem
                     selected={activeTab === "Bridge"}
@@ -343,9 +344,9 @@ function Header_Function() {
                     Bridge
                     {/** Lock icon for the disabled "Bridge" tab */}
                     {/* {activeTab === "Bridge" && ( */}
-                      <LockIconContainer>
-                        <LockIcon />
-                      </LockIconContainer>
+                    <LockIconContainer>
+                      <LockIcon sx={{ color: "#50A883" }} />
+                    </LockIconContainer>
                     {/* )} */}
                   </TabItem>
                   <TabItem
@@ -355,10 +356,15 @@ function Header_Function() {
                     Docs
                   </TabItem>
                   <TabItem
-                    selected={activeTab === "Forum"}
-                    onClick={() => handleChange(null, 5)}
+                    selected={activeTab === "Whitepaper"}
+                    onClick={() => {
+                      window.open(
+                        "https://docs.google.com/document/u/2/d/1HnYTFt-G6A_wqFfYaVwhHRJ35lAdhLcwO8ybLyveT7s/edit?usp=sharing",
+                        "_blank" // Opens the link in a new tab
+                      );
+                    }}
                   >
-                    Forum
+                    Whitepaper
                   </TabItem>
                 </TabsContainer>
               )}
@@ -535,6 +541,8 @@ function Header_Function() {
           ) : value === 12 ? (
             <Privacy_policy />
           ) : value === 13 ? (
+            <Pool_Details />
+          ) : value === 14 ? (
             <Report_bug />
           ) : (
             <Terms />

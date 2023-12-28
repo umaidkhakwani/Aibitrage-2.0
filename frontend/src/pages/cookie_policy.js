@@ -38,8 +38,8 @@ function Cookie_policy() {
           justifyContent="center"
           sx={{ marginTop: "250px" }}
         >
-            {/* Image */}
-            {isMdLgScreen && (
+          {/* Image */}
+          {isMdLgScreen && (
             <Grid
               item
               xs={12}
@@ -62,7 +62,13 @@ function Cookie_policy() {
               />
             </Grid>
           )}
-          <Grid item xs={10} sm={10} md={6} sx={{position:"relative", zIndex:"2"}}>
+          <Grid
+            item
+            xs={10}
+            sm={10}
+            md={6}
+            sx={{ position: "relative", zIndex: "2" }}
+          >
             <Typography
               variant="body1"
               align="center"
@@ -85,7 +91,7 @@ function Cookie_policy() {
                 marginTop: 2,
                 fontFamily: "Poppins",
                 fontSize: 14,
-                marginBottom:"100px",
+                marginBottom: "100px",
               }}
             >
               Welcome to Ai-Bitrage! This Cookie Policy explains how we use
@@ -163,20 +169,36 @@ function Cookie_policy() {
               <br />
               <br />
               If you have any questions or concerns about this Cookie Policy or
-              the use of cookies on our Website, please contact us at [Insert
-              Contact Email Address]. By continuing to use Ai-Bitrage Website,
-              you consent to the use of cookies and tracking technologies as
-              described in this Cookie Policy.
+              the use of cookies on our Website, please contact us at{" "}
+              <a
+                href="mailto:Bitrage.ai@gmail.com"
+                style={{ color: "inherit", textDecoration: "underline" }}
+              >
+                Bitrage.ai@gmail.com
+              </a>
+              .. By continuing to use Ai-Bitrage Website, you consent to the use
+              of cookies and tracking technologies as described in this Cookie
+              Policy.
             </Typography>
           </Grid>
 
           {/* Image */}
           {isMdLgScreen && (
-            <Grid item xs={12} md={3} sx={{display:"flex", justifyContent:"center", alignItems:"flex-end", position:"relative"}}>
+            <Grid
+              item
+              xs={12}
+              md={3}
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "flex-end",
+                position: "relative",
+              }}
+            >
               <img
                 src={cookie_right}
                 alt="Documentation Image"
-                style={{ width: "100%", height: "auto", zIndex:"2" }}
+                style={{ width: "100%", height: "auto", zIndex: "2" }}
               />
             </Grid>
           )}

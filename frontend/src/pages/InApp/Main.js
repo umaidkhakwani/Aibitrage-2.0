@@ -45,7 +45,7 @@ import app_sidebar from "../../images/app_sidebar.gif";
 import footer_img from "../../images/footer.svg";
 
 import inApp from "../../images/inApp.svg";
-import swap_background from "../../images/swap_background.svg";
+import swap_background from "../../images/pools_background.svg";
 import pools_background from "../../images/pools_background.svg";
 import swap_left from "../../images/swap_left.svg";
 import swap_right from "../../images/swap_right.svg";
@@ -803,7 +803,7 @@ function Main() {
                 flexDirection: "column",
               }}
             >
-              {!isMdScreen ? (
+              {!isSmScreen && pageOption !== "pool"  ? (
                 <Box
                   sx={{
                     display: "flex",
@@ -814,8 +814,8 @@ function Main() {
                     background: "5C2D7C",
                     flexDirection: "row",
                     position: "absolute",
-                    right: "0px",
-                    top: "0px",
+                    right: "10px",
+                    top: isMdScreen ? "50px":"0px",
                     marginTop: "40px",
                   }}
                 >
@@ -824,7 +824,7 @@ function Main() {
                       display: "flex",
                       justifyContent: "center",
                       alignItems: "center",
-                      background: "white",
+                      // background: "white",
                       width: "60%",
                       borderRadius: "7px",
                       cursor: "pointer",

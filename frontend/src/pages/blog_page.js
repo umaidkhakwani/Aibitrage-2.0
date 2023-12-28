@@ -89,47 +89,41 @@ function Blog_page() {
                 fontSize: 18,
                 position: "relative",
                 zIndex: "2",
-                marginBottom:"100px",
+                marginBottom: "100px",
               }}
             >
-              AI-BITRAGE is a new launchpad being built for the crypto space.
-              AI-BITRAGE has a vision of bringing guaranteed profits to all
-              users across the space. The launchpad is being developed to exist
-              and operate as an Initial Dex Offering (IDO). The IDO is backed by
-              investors that would for sure be known as whales if their wallets
-              were viewed by the general public.
+              AIBITRAGE is a new platform being built for the crypto space.
+              AIBITRAGE has a vision of bringing guaranteed profits to all users
+              across the space. The platform is being developed to exist and
+              operate as an arbitrage machine. The software is revolutionary,
+              and the development team has cultivated an algorithm, capable of
+              evaluating cryptocurrencies across the blockchain. When evaluating
+              it looks for the tokens that can be taken advantaged of to gain
+              guaranteed profits. When we say, “taken advantaged of”, we mean it
+              looks for the swaps, CEX’S and DEX’S to see if there is a
+              difference in price from one another for a pure arbitrage.
               <br />
               <br />
-              The software is revolutionary and the development team has
-              cultivated an algorithm, capable of evaluating Ethereum tokens
-              across the blockchain.
+              The algorithm is developed to monitor every aspect of a new
+              cryptocurrencies in detail. The details it monitors is the
+              contract, lock, renounce, market cap, liquidity, telegram,
+              CoinMarketCap listings, CoinGecko listings, website and
+              cryptocurrency mentioning across all CEX’s. The algorithm was
+              built upon analysis from over two years of research and networking
+              (yes, we existed in the golden era of 2021). All users are
+              probably wondering “why is the word AI implemented in this
+              project”?
               <br />
               <br />
-              The algorithm will then signal back that it has detected a
-              potential arbitrage, our team will then re check the arbitrage for
-              our users safety and our reputation and then go ahead or will
-              ignore and wait for the next signal to occur.
-              <br />
-              <br />
-              The algorithm, is developed to monitor every aspect of a new token
-              is detail. The details it monitors is the contract, lock,
-              renounce, market cap, liquidity, telegram, CoinMarketCap listings,
-              CoinGecko listings, website and token mentioning.The algorithm was
-              built up on analysis from over a two years of research and
-              networking (yes we existed in the golden era of 2021).
-              <br />
-              <br />
-              All users are probably wondering “why is the word AI implemented
-              in this project”?. This is because the algorithm was actually
-              developed using AI technology to code this high tech IDO. The team
-              thought why not use AI due to its constant learning and efforts to
-              always provide accurate and modern knowledge to the stage. It made
+              This is because the algorithm was actually developed using AI
+              technology to code this high-tech platform. The team thought why
+              not use AI due to its constant learning and efforts to always
+              provide accurate and modern knowledge to the stage. It made
               perfect sense and yes you guessed it, it worked. We have developed
               a new way of decentralized trading to the fortunate people within
               crypto.
               <br />
               <br />
-              For More Information, Visit our Socials:
             </Typography>
           </Grid>
 

@@ -9,6 +9,7 @@
     "@ethersproject/units": "^5.7.0",
     "@mui/icons-material": "^5.14.18",
     "@mui/material": "^5.14.18",
+    "@nice-xrpl/react-xrpl": "^1.1.1",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -25,7 +26,8 @@
     "react-scripts": "5.0.1",
     "styled-components": "^6.1.1",
     "web-vitals": "^2.1.4",
-    "web3": "^4.3.0"
+    "web3": "^4.3.0",
+    "xrpl": "^2.14.0"
   },
   "scripts": {
     "predeploy": "npm run build",

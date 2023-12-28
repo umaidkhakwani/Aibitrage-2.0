@@ -37,3 +37,8 @@
   font-family: 'Montserrat';
   src: url('./Montserrat-Regular.ttf') format('opentype');
 }
+
+@font-face {
+  font-family: 'Cambria';
+  src: url('./Cambria.ttf') format('opentype');
+}

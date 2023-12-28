@@ -14,7 +14,6 @@ const ModalComponent = () => {
   const isLgScreen = useMediaQuery(theme.breakpoints.down("lg"));
   const matches = useMediaQuery("(min-width:600px)");
 
-
   const closeModal = () => {
     setModalIsOpen(false);
   };
@@ -53,73 +52,81 @@ const ModalComponent = () => {
         },
       }}
     >
-      <Container sx={{width:"100%", height:"100%", display:"flex", justifyContent:"center", alignItems:"center", flexDirection:"column"}}>
-
-      <Typography
+      <Container
         sx={{
-          color: "#FFF",
-          fontFamily: "Aclonica",
-          fontSize: "38px",
-          fontStyle: "normal",
-          textAlign: "center",
-        }}
-      >
-        Cookies Settings
-      </Typography>
-
-      <Typography
-        sx={{
-          color: "#FFF",
-          fontFamily: "Lora",
-          fontSize: "14px",
-          fontStyle: "normal",
-          textAlign: "justify",
-          
-        }}
-      >
-        Lorem Ipsum is simply dummy text of the printing and typesetting
-        industry. Lorem Ipsum has been the industry's standard dummy text ever
-        since the 1500s, when an unknown printer took a galley of type and
-        scrambled it to make a type specimen book
-      </Typography>
-
-      <div
-        style={{
+          width: "100%",
+          height: "100%",
           display: "flex",
-          justifyContent: "space-between",
-          marginTop: "20px",
+          justifyContent: "center",
+          alignItems: "center",
+          flexDirection: "column",
         }}
       >
-        <button
-          style={{
-            background: "#50A883",
-            color: "white",
-            padding: "5px 20px",
-            borderRadius: "20px",
-            border:"none",
-            margin:"5px 20px",
-            fontFamily:"Rakkas",
+        <Typography
+          sx={{
+            color: "#FFF",
+            fontFamily: "Aclonica",
+            fontSize: "38px",
+            fontStyle: "normal",
+            textAlign: "center",
           }}
-          onClick={closeModal}
         >
-          Accept
-        </button>
-        <button
-          style={{
-            background: "transparent",
-            border: "0px solid black",
-            color: "white",
-            padding: "10px",
-            borderRadius: "5px",
-            fontFamily:"Rakkas",
-          }}
-          onClick={closeModal}
-        >
-          Reject
-        </button>
-      </div>
-      </Container>
+          Cookies Settings
+        </Typography>
 
+        <Typography
+          sx={{
+            color: "#FFF",
+            fontFamily: "Lora",
+            fontSize: "14px",
+            fontStyle: "normal",
+            textAlign: "justify",
+          }}
+        >
+          Welcome to our website! To ensure the best possible experience, we
+          use cookies. These are used to personalize content, provide social
+          media features, and analyze our traffic. By clicking 'Accept,' you
+          consent to our use of cookies. You can also manage your cookie
+          preferences by selecting 'Cookie Settings.' For more information,
+          please read our Cookie Policy. Thank you for visiting!
+        </Typography>
+
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            marginTop: "20px",
+          }}
+        >
+          <button
+            style={{
+              background: "#50A883",
+              color: "white",
+              padding: "5px 20px",
+              borderRadius: "20px",
+              border: "none",
+              margin: "5px 20px",
+              fontFamily: "Rakkas",
+            }}
+            onClick={closeModal}
+          >
+            Accept
+          </button>
+          <button
+            style={{
+              background: "transparent",
+              border: "0px solid black",
+              color: "white",
+              padding: "10px",
+              borderRadius: "5px",
+              fontFamily: "Rakkas",
+            }}
+            onClick={closeModal}
+          >
+            Reject
+          </button>
+        </div>
+      </Container>
     </Modal>
   );
 };

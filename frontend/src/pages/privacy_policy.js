@@ -212,10 +212,16 @@ function Privacy_policy() {
               <br />
               <br />
               If you have any questions or concerns about this Privacy Policy or
-              the use of your personal information, please contact us at [Insert
-              Contact Email Address]. By using Ai-Bitrage Website, you agree to
-              the terms of this Privacy Policy and the collection and use of
-              your personal information as described herein.
+              the use of your personal information, please contact us at{" "}
+              <a
+                href="mailto:Bitrage.ai@gmail.com"
+                style={{ color: "inherit", textDecoration: "underline" }}
+              >
+                Bitrage.ai@gmail.com
+              </a>
+              . By using Ai-Bitrage Website, you agree to the terms of this
+              Privacy Policy and the collection and use of your personal
+              information as described herein.
               <br />
               <br />
             </Typography>

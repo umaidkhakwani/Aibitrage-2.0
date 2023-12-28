@@ -49,10 +49,16 @@ import btc_trend from "../images/btc_trend.svg";
 import usdt_trend from "../images/usdt_trend.svg";
 import eth_trend from "../images/eth_trend.svg";
 import bnb_trend from "../images/bnb_trend.svg";
+import xrp_trend from "../images/xrp_trend.svg";
 import bnb_chart from "../images/bnb_chart.png";
 import btc_chart from "../images/btc_chart.png";
 import usdt_chart from "../images/usdt_chart.png";
 import eth_chart from "../images/eth_chart.png";
+
+import btc from "../images/btc.png";
+import usdt from "../images/usdt.png";
+import eth from "../images/eth.png";
+import xrp from "../images/xrp.png";
 
 import graph1 from "../images/graph1.png";
 import graph2 from "../images/graph2.png";
@@ -242,7 +248,8 @@ function Homepage({ callback }) {
     const nameAndPriceArray = [];
 
     axios
-      .get("http://localhost:3001/api/cryptocurrency")
+      .get("http://194.163.45.79:3001/api/cryptocurrency")
+      // .get("http://localhost:3001/api/cryptocurrency")
       .then((response) => {
         const data = response.data;
         data.data.forEach((coin) => {
@@ -251,8 +258,18 @@ function Homepage({ callback }) {
           let price = coin.quote.USD.price;
           let symbol = coin.symbol;
           let change = coin.quote.USD.percent_change_1h;
+          let image =
+            coin.symbol === "BTC"
+              ? btc
+              : coin.symbol === "USDT"
+              ? usdt
+              : coin.symbol === "ETH"
+              ? eth
+              : coin.symbol === "XRP"
+              ? xrp
+              : "";
           // const { name, "price" : quote: { USD: { price } } , "24hVolume": volume, change } = coin;
-          nameAndPriceArray.push({ name, price, symbol, change });
+          nameAndPriceArray.push({ name, price, symbol, change, image });
         });
         console.log("API Response:", response.data);
         console.log("nameAndPriceArray:", nameAndPriceArray);
@@ -301,6 +318,9 @@ function Homepage({ callback }) {
 
   useEffect(() => {
     handleApi();
+    const intervalId = setInterval(() => {
+      handleApi();
+    }, 10000);
   }, []);
 
   useEffect(() => {
@@ -373,14 +393,28 @@ function Homepage({ callback }) {
                 >
                   <br />
                   <br />
-                  AI-BITRAGE is a new launchpad being built for the crypto
-                  space. AI-BITRAGE has a vision of bringing guaranteed profits
-                  to all users across the space.
+                  AIBITRAGE is redefining the world of trading, creating a
+                  dynamic platform that engages and empowers anons and
+                  decentralized enthusiasts alike. We take pride in creating the
+                  first and only platform that guarantees profits on all trades.
+                  The platform is packed with excitement and high-end technology
+                  that’s been created with the essence of Artificial
+                  Intelligence.
+                  <br />
+                  <br />
+                  AIBITRAGE is more than a platform it is an experience we can’t
+                  wait to share. We have partnerships with many protocols that
+                  have set statements in the decentralized world. The world will
+                  soon see who we have partnered up with and it will take them
+                  by storm!
+                  {/* AI-BITRAGE is a new platform being built for the crypto space.
+                  AI-BITRAGE has a vision of bringing guaranteed profits to all
+                  users across the space.
                   <br />
                   <br />
                   The software is revolutionary, and the development team has
                   cultivated an algorithm capable of evaluating Ethereum tokens
-                  across the blockchain.
+                  across the blockchain. */}
                 </Typography>
 
                 <Box
@@ -399,7 +433,7 @@ function Homepage({ callback }) {
                       border: "none",
                       borderRadius: "10px",
                       background:
-                      "linear-gradient(101deg, #1F8EBE -5.36%, #440495 29.46%, #440495 56.03%, #B102CD 81.92%)",
+                        "linear-gradient(101deg, #1F8EBE -5.36%, #440495 29.46%, #440495 56.03%, #B102CD 81.92%)",
                       color: "#fff",
                       fontSize: "16px",
                       cursor: "pointer",
@@ -411,11 +445,12 @@ function Homepage({ callback }) {
                           "linear-gradient(95deg, #A27BD3 0%, #9F9ADB 58.45%, #9ADBEC 90.51%)",
                       },
                     }}
+                    onClick={() => handle_callback(0)}
                   >
                     Explore
                   </button>
 
-                  <button
+                  {/* <button
                     style={{
                       // padding: "10px 20px",
                       width: isMdScreen ? "100px" : "150px",
@@ -437,7 +472,7 @@ function Homepage({ callback }) {
                     }}
                   >
                     Create
-                  </button>
+                  </button> */}
                 </Box>
               </Box>
             </Grid>
@@ -547,7 +582,10 @@ function Homepage({ callback }) {
                           color: "#ECF1F0",
                         }}
                       >
-                        ${(coinsData && coinsData[0] && coinsData[0].price) ? (coinsData[0]?.price).toFixed(4) : "43000"}
+                        $
+                        {coinsData && coinsData[0] && coinsData[0].price
+                          ? (coinsData[0]?.price).toFixed(4)
+                          : "43000"}
                       </Typography>
 
                       <Typography
@@ -559,8 +597,10 @@ function Homepage({ callback }) {
                           lineHeight: "1.2",
                         }}
                       >
-                        {(coinsData && coinsData[0] && coinsData[0].price) ? (coinsData[0]?.change).toFixed(6) : "1.41"}%
-                        {/* 1.41% */}
+                        {coinsData && coinsData[0] && coinsData[0].price
+                          ? (coinsData[0]?.change).toFixed(6)
+                          : "1.41"}
+                        %{/* 1.41% */}
                       </Typography>
                     </Grid>
                     <Grid item xs={6} sm={6} md={6} lg={6}>
@@ -622,7 +662,10 @@ function Homepage({ callback }) {
                           color: "#ECF1F0",
                         }}
                       >
-                        ${(coinsData && coinsData[0] && coinsData[0].price) ? (coinsData[1]?.price).toFixed(4) : "43000"}
+                        $
+                        {coinsData && coinsData[0] && coinsData[0].price
+                          ? (coinsData[1]?.price).toFixed(4)
+                          : "43000"}
                       </Typography>
 
                       <Typography
@@ -634,7 +677,10 @@ function Homepage({ callback }) {
                           lineHeight: "1.2",
                         }}
                       >
-                        {(coinsData && coinsData[0] && coinsData[0].price) ? (coinsData[1]?.change).toFixed(6) : "1.41"}%
+                        {coinsData && coinsData[0] && coinsData[0].price
+                          ? (coinsData[1]?.change).toFixed(6)
+                          : "1.41"}
+                        %
                       </Typography>
                     </Grid>
                     <Grid item xs={6} sm={6} md={6} lg={6}>
@@ -674,7 +720,7 @@ function Homepage({ callback }) {
                   }}
                 >
                   <img
-                    src={bnb_trend}
+                    src={xrp_trend}
                     alt="logo"
                     style={{
                       padding: isSmScreen ? "0px 10px" : "0px",
@@ -696,7 +742,10 @@ function Homepage({ callback }) {
                           color: "#ECF1F0",
                         }}
                       >
-                        ${(coinsData && coinsData[0] && coinsData[0].price) ? (coinsData[4]?.price).toFixed(4) : "$43000"}
+                        $
+                        {coinsData && coinsData[0] && coinsData[0].price
+                          ? (coinsData[5]?.price).toFixed(4)
+                          : "$43000"}
                       </Typography>
 
                       <Typography
@@ -708,7 +757,10 @@ function Homepage({ callback }) {
                           lineHeight: "1.2",
                         }}
                       >
-                        {(coinsData && coinsData[0] && coinsData[0].change) ? (coinsData[0]?.change).toFixed(4) : "$43000"}%
+                        {coinsData && coinsData[0] && coinsData[0].change
+                          ? (coinsData[5]?.change).toFixed(4)
+                          : "$43000"}
+                        %
                       </Typography>
                     </Grid>
                     <Grid item xs={6} sm={6} md={6} lg={6}>
@@ -770,7 +822,10 @@ function Homepage({ callback }) {
                           color: "#ECF1F0",
                         }}
                       >
-                        ${(coinsData && coinsData[0] && coinsData[0].price) ?(coinsData[2]?.price).toFixed(4) : "$43000"}
+                        $
+                        {coinsData && coinsData[0] && coinsData[0].price
+                          ? (coinsData[2]?.price).toFixed(4)
+                          : "$43000"}
                       </Typography>
 
                       <Typography
@@ -782,7 +837,10 @@ function Homepage({ callback }) {
                           lineHeight: "1.2",
                         }}
                       >
-                        {(coinsData && coinsData[0] && coinsData[0].change) ?(coinsData[2]?.change).toFixed(4) : "$43000"}%
+                        {coinsData && coinsData[0] && coinsData[0].change
+                          ? (coinsData[2]?.change).toFixed(4)
+                          : "$43000"}
+                        %
                       </Typography>
                     </Grid>
                     <Grid item xs={6} sm={6} md={6} lg={6}>
@@ -867,7 +925,7 @@ function Homepage({ callback }) {
                 lineHeight: "1.2",
               }}
             >
-              Trusted and Secure Bitcoin
+              COMING to AIBITRAGE
               <br />
               <br />
             </Typography>
@@ -881,9 +939,9 @@ function Homepage({ callback }) {
                 lineHeight: "1.2",
               }}
             >
-              Built on Arbitrum and Avalanche, our decentralized leverage
-              trading exchange focuses on being the best execution environment
-              for trades.
+              Here at AIBIRAGE we are constantly building for you. We are making
+              an ecosystem where users would be able to get the most out of
+              AIBITRAGE’s Platform.
               <br />
               <br />
             </Typography>
@@ -997,18 +1055,19 @@ function Homepage({ callback }) {
                 >
                   <br />
                   <br />
-                  AI-BITRAGE is a new launchpad being built for the crypto
-                  space. AI-BITRAGE has a vision of bringing guaranteed profits
-                  to all users across the space. The launchpad is being
-                  developed to exist and operate as an Initial Dex Offering
-                  (IDO). The IDO is backed by investors that would for sure be
-                  known as whales if their wallets were viewed by the general
-                  public.
+                  AIBITRAGE, a groundbreaking crypto platform, is on a mission
+                  to ensure guaranteed profits for all users. Operating as an
+                  arbitrage machine, it leverages a revolutionary algorithm
+                  developed using AI technology. This algorithm evaluates
+                  cryptocurrencies across blockchains, identifying opportunities
+                  for pure arbitrage by analyzing swaps, CEX’s, and DEX’s. The
+                  algorithm monitors crucial details, such as contract, lock,
+                  renounce, market cap, liquidity, and more. Built on over two
+                  years of research and networking, AIBITRAGE introduces a new
+                  era of decentralized trading, providing accurate insights and
+                  modern knowledge for crypto enthusiasts.
                   <br />
                   <br />
-                  The software is revolutionary and the development team has
-                  cultivated an algorithm, capable of evaluating Ethereum tokens
-                  across the blockchain.
                 </Typography>
               </Container>
             </Grid>
@@ -1109,14 +1168,24 @@ function Homepage({ callback }) {
                 >
                   <br />
                   <br />
-                  The IDO is made for users to stake an amount of Ethereum, on
-                  each pool of their choice. Each pool will only allow a certain
-                  amount of users per month to stake Ethereum. E.G. each pool
-                  will allow a max of 250 users per month (31 days). When the
-                  month is over, users funds and profits will be unlocked from
-                  the pool’s and will be accessible for withdrawals back into
-                  the users wallets. The pool’s have been created to operate on
-                  a “first come ,first serve” basis.
+                  AI BITRAGE is a cutting-edge platform that allows users to
+                  stake Ethereum in various pools, tailored to different
+                  investment preferences. Leveraging advanced AI technology, the
+                  platform identifies and exploits cryptocurrency arbitrage
+                  opportunities across centralized exchanges. With intelligent
+                  risk management and real-time monitoring, user assets are
+                  secure. The more users stake, the higher their share of
+                  monthly profits, creating a direct link between investment
+                  commitment and returns. AI BITRAGE offers a revolutionary
+                  blend of AI efficiency and blockchain transparency, providing
+                  a secure environment for navigating and capitalizing on the
+                  dynamic crypto market.
+                  <br />
+                  <br />
+                  Choose from our 4 unique pools, each designed to accommodate
+                  different investment levels. As we continue to grow, more
+                  pools will be introduced to cater to a wider audience,
+                  showcasing the potential of AIBITRAGE.
                   <br />
                   <br />
                 </Typography>
@@ -1130,7 +1199,8 @@ function Homepage({ callback }) {
                     border: "none",
                     borderRadius: "15px",
                     marginTop: "10px",
-                    background: "#50A883",
+                    background:
+                    "linear-gradient(101deg, #1F8EBE -5.36%, #440495 29.46%, #440495 56.03%, #B102CD 81.92%)",
                     color: "#fff",
                     cursor: "pointer",
                     textDecoration: "none",
@@ -1138,8 +1208,9 @@ function Homepage({ callback }) {
                     fontSize: "11px",
                     zIndex: 101,
                   }}
+                  onClick={() => handle_callback(4)}
                 >
-                  Launch App
+                  Explore
                 </button>
               </Container>
             </Grid>
@@ -1187,7 +1258,7 @@ function Homepage({ callback }) {
                 marginBottom: "10px",
               }}
             >
-              CryptoCap Amazing Features
+              AIBITRAGE Features
               <br />
               <br />
             </Typography>
@@ -1202,8 +1273,8 @@ function Homepage({ callback }) {
                 marginBottom: "10px",
               }}
             >
-              Explore sensational features to prepare your best investment in
-              cryptocurrency
+              Explore our sensational features to prepare your best investment
+              in cryptocurrency
               <br />
               <br />
             </Typography>
@@ -1259,7 +1330,7 @@ function Homepage({ callback }) {
                           color: "#ECF1F0",
                         }}
                       >
-                        Manage Portfolio
+                        Guaranteed Profits
                         <br />
                         <br />
                       </Typography>
@@ -1355,7 +1426,7 @@ function Homepage({ callback }) {
                           color: "#ECF1F0",
                         }}
                       >
-                        Protected Securely
+                        Swap Features
                         <br />
                         <br />
                       </Typography>
@@ -1369,8 +1440,8 @@ function Homepage({ callback }) {
                           lineHeight: "1.2",
                         }}
                       >
-                        All cash balances are covered by FDIC insurance, up to a
-                        maximum of $250,000.
+                        We have implemented this for users that have vested
+                        on our platform.
                       </Typography>
                     </Grid>
                     {/* <Grid item xs={12} sm={12} md={12} lg={12}>
@@ -1547,7 +1618,7 @@ function Homepage({ callback }) {
                           color: "#ECF1F0",
                         }}
                       >
-                        Learn Best Practice
+                        Tailored Pools
                         <br />
                         <br />
                       </Typography>
@@ -1561,8 +1632,7 @@ function Homepage({ callback }) {
                           lineHeight: "1.2",
                         }}
                       >
-                        Easy to know how to cryptocurrency works and friendly to
-                        newbie.
+                        Select which pool is for you and lets get TRADING!
                       </Typography>
                     </Grid>
                     {/* <Grid item xs={12} sm={12} md={12} lg={12}>
@@ -1615,15 +1685,18 @@ function Homepage({ callback }) {
                 fontSize: isSmScreen ? "26px" : "30px",
                 color: "#50A883",
                 textAlign: "center",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
                 lineHeight: "1.2",
                 marginBottom: "10px",
               }}
             >
-              Buy and sell with the lowest fees in the industry
+              Live Market Data
               <br />
               <br />
             </Typography>
-            <Typography
+            {/* <Typography
               variant="h6"
               sx={{
                 fontFamily: "Aclonica",
@@ -1638,8 +1711,8 @@ function Homepage({ callback }) {
               eiusmod tempos Lorem ipsum dolor sit amet
               <br />
               <br />
-            </Typography>
-            <Box
+            </Typography> */}
+            {/* <Box
               sx={{
                 width: "100%",
                 display: "flex",
@@ -1661,17 +1734,17 @@ function Homepage({ callback }) {
                 Learn More
               </Typography>
               <ArrowRightAltIcon sx={{ marginLeft: "5px", color: "#B982FF" }} />
-            </Box>
+            </Box> */}
           </Container>
 
           {/* Pool table */}
 
           <Container
             sx={{
-              background: "black",
+              background: "rgba(0, 0, 0, 0.40)", // Transparent background with 0.25 opacity
               borderRadius: "10px",
               width: "70%",
-              marginTop: "50px",
+              marginTop: "0px",
             }}
           >
             <div style={{ overflowX: "auto" }}>
@@ -1707,6 +1780,20 @@ function Homepage({ callback }) {
                             }}
                           >
                             <TableCell>
+                              <img
+                                src={row.image}
+                                alt="logo"
+                                style={{
+                                  padding: isSmScreen
+                                    ? "0px 10px"
+                                    : "5px 0px 0px 0px",
+                                  width: "40px",
+                                  marginBottom: "10px",
+                                }}
+                              />
+                            </TableCell>
+
+                            <TableCell>
                               <Typography
                                 variant="h6"
                                 sx={{
@@ -1739,7 +1826,10 @@ function Homepage({ callback }) {
                                   color: "#fff",
                                 }}
                               >
-                                ${(row  && row.price) ? row.price.toFixed(5) : "$43000"}
+                                $
+                                {row && row.price
+                                  ? row.price.toFixed(5)
+                                  : "$43000"}
                               </Typography>
                             </TableCell>
                             <TableCell>
@@ -1775,7 +1865,7 @@ function Homepage({ callback }) {
                               />
                             </TableCell>
                             <TableCell>
-                              <Box
+                              {/* <Box
                                 sx={{
                                   width: "100%",
                                   display: "flex",
@@ -1799,7 +1889,7 @@ function Homepage({ callback }) {
                                 <ArrowRightAltIcon
                                   sx={{ marginLeft: "5px", color: "#B982FF" }}
                                 />
-                              </Box>
+                              </Box> */}
                             </TableCell>
                           </TableRow>
                         ) : null
@@ -1952,8 +2042,7 @@ function Homepage({ callback }) {
                 }}
               >
                 We have all been in this industry too long not to make the
-                security of your funds our absolute top priority. We’ve received
-                multiple audits from Open Zeppelin and Trail
+                security of your funds our absolute top priority.
                 <br />
                 <br />
               </Typography>

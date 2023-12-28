@@ -75,7 +75,7 @@ function Docs_page() {
                 zIndex: "2",
               }}
             >
-              What is AI-BITRAGE?
+              How AI-BITRAGE will work?
             </Typography>
             <Typography
               variant="body1"
@@ -90,45 +90,37 @@ function Docs_page() {
                 zIndex: "2",
               }}
             >
-              AI-BITRAGE is a new launchpad being built for the crypto space.
-              AI-BITRAGE has a vision of bringing guaranteed profits to all
-              users across the space. The launchpad is being developed to exist
-              and operate as an Initial Dex Offering (IDO). The IDO is backed by
-              investors that would for sure be known as whales if their wallets
-              were viewed by the general public.
+              The platform is made for users to stake an amount of Ethereum, on
+              each pool of their choice. AI BITRAGE functions as a sophisticated
+              cryptocurrency arbitrage platform, employing advanced artificial
+              intelligence to exploit price variations across various
+              centralised exchanges. Users select from diverse investor pools
+              tailored to their preferences, ranging from novice to
+              high-net-worth investors. The AI algorithm executes trades with
+              precision, identifying and capitalising on arbitrage opportunities
+              seamlessly. The platform's intelligent risk management, including
+              real-time monitoring and predictive analytics, ensures the
+              security of user assets. As users stake higher percentages, they
+              participate in a proportionate share of monthly profits, creating
+              a direct correlation between investment commitment and financial
+              returns. AI BITRAGE represents a revolutionary convergence of AI
+              efficiency and blockchain transparency, providing users with an
+              innovative and secure environment to navigate and capitalise on
+              the dynamic crypto market.
               <br />
               <br />
-              The software is revolutionary and the development team has
-              cultivated an algorithm, capable of evaluating Ethereum tokens
-              across the blockchain.
+              We have created 4 unique pools for users to choose from, in all
+              honesty this is due to the amount of funds we have and are
+              spreading across to each of our wallets to facilitate for all
+              users to gain from the one and only AIBITRAGE. We have our own
+              personal funds that we will be depositing into different exchanges
+              (Decentralized and Centralized) for the arbitrage to be taken
+              place everywhere profits are attained. The number of pools will
+              increase over time as more attraction and more investors see the
+              capabilities.
               <br />
               <br />
-              The algorithm will then signal back that it has detected a
-              potential arbitrage, our team will then re check the arbitrage for
-              our users safety and our reputation and then go ahead or will
-              ignore and wait for the next signal to occur.
-              <br />
-              <br />
-              The algorithm, is developed to monitor every aspect of a new token
-              is detail. The details it monitors is the contract, lock,
-              renounce, market cap, liquidity, telegram, CoinMarketCap listings,
-              CoinGecko listings, website and token mentioning.The algorithm was
-              built up on analysis from over a two years of research and
-              networking (yes we existed in the golden era of 2021).
-              <br />
-              <br />
-              All users are probably wondering “why is the word AI implemented
-              in this project”?. This is because the algorithm was actually
-              developed using AI technology to code this high tech IDO. The team
-              thought why not use AI due to its constant learning and efforts to
-              always provide accurate and modern knowledge to the stage. It made
-              perfect sense and yes you guessed it, it worked. We have developed
-              a new way of decentralized trading to the fortunate people within
-              crypto.
-              <br />
-              <br />
-              For More Information, Visit our Socials:
-            </Typography>
+              </Typography>
           </Grid>
 
           {/* Image */}
