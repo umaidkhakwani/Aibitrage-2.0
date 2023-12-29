@@ -68,8 +68,8 @@ function Swap_function() {
     const nameAndPriceArray = [];
 
     axios
-      .get("http://194.163.45.79:3001/api/cryptocurrency")
-      // .get("http://localhost:3001/api/cryptocurrency")
+      // .get("http://194.163.45.79:3001/api/cryptocurrency")
+      .get("http://localhost:3001/api/cryptocurrency")
       .then((response) => {
         const data = response.data;
         data.data.forEach((coin) => {
@@ -293,7 +293,7 @@ function Swap_function() {
                 onClick={(event) => setProfileAnchorEl(event.currentTarget)}
               >
                 <img
-                  src={coinSelected.image || btc}
+                  src={coinSelected.image || aib}
                   alt="Coin1"
                   style={{ width: "25px", height: "25px" }}
                 />
@@ -305,7 +305,7 @@ function Swap_function() {
                     margin: "5px",
                   }}
                 >
-                  {coinSelected.symbol || "BTC"}
+                  {coinSelected.symbol || "AIB"}
                 </Typography>
                 <KeyboardArrowDownIcon sx={{ color: "white" }} />
               </Box>
@@ -328,7 +328,7 @@ function Swap_function() {
                   }}
                 >
                   Balance {coinSelected.wallet || "N/A"}{" "}
-                  {coinSelected.symbol || "BTC"}
+                  {coinSelected.symbol || "AIB"}
                 </Typography>
               </Box>
               {/* <Typography
@@ -376,7 +376,7 @@ function Swap_function() {
                 }}
               >
                 {coinsData.map((menuItem) =>
-                  menuItem.symbol === "AIB" || menuItem.symbol === "BTC" ? (
+                  menuItem.symbol === "AIB" || menuItem.symbol === "ETH" ? (
                     <MenuItem
                       key={menuItem.id}
                       sx={{
@@ -491,7 +491,7 @@ function Swap_function() {
                 onClick={(event) => setProfileAnchorEl2(event.currentTarget)}
               >
                 <img
-                  src={coinSelected2.image || aib}
+                  src={coinSelected2.image || eth}
                   alt="Coin2"
                   style={{ width: "25px", height: "25px" }}
                 />
@@ -503,7 +503,7 @@ function Swap_function() {
                     margin: "5px",
                   }}
                 >
-                  {coinSelected2.symbol || "AIB"}
+                  {coinSelected2.symbol || "ETH"}
                 </Typography>
                 <KeyboardArrowDownIcon sx={{ color: "white" }} />
               </Box>
@@ -525,7 +525,7 @@ function Swap_function() {
                     margin: "5px",
                   }}
                 >
-                  Balance {coinSelected2.wallet || "N/A"} {coinSelected2.symbol || "AIB"}
+                  Balance {coinSelected2.wallet || "N/A"} {coinSelected2.symbol || "ETH"}
                 </Typography>
               </Box>
               <Typography
@@ -577,7 +577,7 @@ function Swap_function() {
                 }}
               >
                 {coinsData.map((menuItem) =>
-                  menuItem.symbol === "AIB" || menuItem.symbol === "BTC" ? (
+                  menuItem.symbol === "AIB" || menuItem.symbol === "ETH" ? (
                     <MenuItem
                       key={menuItem.id}
                       sx={{

@@ -289,16 +289,27 @@ function Header_Function() {
                         key={index}
                         sx={{
                           display: "flex",
-                          justifyContent: "center", // Adjusted to place lock icon to the right
+                          justifyContent: "center",
                           alignItems: "center",
-                          flexDirection: "row", // Set flexDirection to row
-                          fontFamily: "Aclonica", // Set the fontFamily to Poppins
-                          padding: "10px", // Added padding for better spacing
+                          flexDirection: "row",
+                          fontFamily: "Aclonica",
+                          padding: "10px",
                         }}
-                        onClick={() => handleChange(null, index)}
+                        onClick={() => {
+                          if (index === 5) {
+                            // Redirect to a different URL
+                            window.open(
+                              "https://docs.google.com/document/u/2/d/1HnYTFt-G6A_wqFfYaVwhHRJ35lAdhLcwO8ybLyveT7s/edit?usp=sharing",
+                              "_blank"
+                            );
+                          } else {
+                            // Handle other index values
+                            handleChange(null, index);
+                          }
+                        }}
                       >
                         <div>{getTabName(index)}</div>
-                        {(index === 1 || index === 3 || index === 2) && (
+                        {(index === 1 || index === 2 || index === 3) && (
                           <LockIcon style={{ color: "#50A883" }} />
                         )}
                       </MenuItem>

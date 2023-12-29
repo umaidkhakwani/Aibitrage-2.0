@@ -12,7 +12,6 @@ import new3 from "../images/new3.png";
 import terms_left from "../images/terms_left.svg";
 import terms_right from "../images/terms_right.svg";
 
-
 import "../fonts/fonts.css";
 import FooterFunction from "../footer";
 import { useTheme } from "@mui/system";
@@ -32,7 +31,7 @@ function Terms() {
           height: "100%",
           display: "flex",
           alignItems: "center",
-          paddingBottom:"100px",
+          paddingBottom: "100px",
           justifyContent: "center",
         }}
       >
@@ -42,8 +41,8 @@ function Terms() {
           justifyContent="center"
           sx={{ marginTop: "250px" }}
         >
-            {/* Image */}
-            {isMdLgScreen && (
+          {/* Image */}
+          {isMdLgScreen && (
             <Grid
               item
               xs={12}
@@ -217,9 +216,15 @@ function Terms() {
               <br />
               <br />
               If you have any questions or concerns about these Terms or the use
-              of the Website, please contact us at [Insert Contact Email
-              Address]. By using Ai-Bitrage Website, you agree to be bound by
-              these Terms of Use.
+              of the Website, please contact us at{" "}
+              <a
+                href="mailto:Bitrage.ai@gmail.com"
+                style={{ color: "inherit", textDecoration: "underline" }}
+              >
+                Bitrage.ai@gmail.com
+              </a>
+              . By using Ai-Bitrage Website, you agree to be bound by these
+              Terms of Use.
               <br />
               <br />
             </Typography>

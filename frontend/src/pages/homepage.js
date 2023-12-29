@@ -202,6 +202,7 @@ function Homepage({ callback }) {
   const isSmScreen = useMediaQuery(theme.breakpoints.down("sm"));
   const isMdScreen = useMediaQuery(theme.breakpoints.down("md"));
   const isLgScreen = useMediaQuery(theme.breakpoints.down("lg"));
+  const isXlScreen = useMediaQuery(theme.breakpoints.down("xl"));
   // const matches = useMediaQuery("(min-width:1020px)");
   const matches = useMediaQuery("(min-width: 1200px) and (max-width: 1600px)");
   const matches_600 = useMediaQuery(
@@ -248,8 +249,8 @@ function Homepage({ callback }) {
     const nameAndPriceArray = [];
 
     axios
-      .get("http://194.163.45.79:3001/api/cryptocurrency")
-      // .get("http://localhost:3001/api/cryptocurrency")
+      // .get("http://194.163.45.79:3001/api/cryptocurrency")
+      .get("http://localhost:3001/api/cryptocurrency")
       .then((response) => {
         const data = response.data;
         data.data.forEach((coin) => {
@@ -320,7 +321,7 @@ function Homepage({ callback }) {
     handleApi();
     const intervalId = setInterval(() => {
       handleApi();
-    }, 10000);
+    }, 60000);
   }, []);
 
   useEffect(() => {
@@ -515,7 +516,7 @@ function Homepage({ callback }) {
             width: "100%",
             height: "100%",
             position: "relative",
-            bottom: "125px",
+            bottom: isXlScreen?"0px":"125px",
           }}
         >
           <Typography
@@ -1061,10 +1062,9 @@ function Homepage({ callback }) {
                   developed using AI technology. This algorithm evaluates
                   cryptocurrencies across blockchains, identifying opportunities
                   for pure arbitrage by analyzing swaps, CEX’s, and DEX’s. The
-                  algorithm monitors crucial details, such as contract, lock,
-                  renounce, market cap, liquidity, and more. Built on over two
+                  algorithm monitors crucial details. Built on over two
                   years of research and networking, AIBITRAGE introduces a new
-                  era of decentralized trading, providing accurate insights and
+                  era of trading, providing accurate insights and
                   modern knowledge for crypto enthusiasts.
                   <br />
                   <br />
