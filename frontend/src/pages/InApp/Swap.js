@@ -170,6 +170,17 @@ function Swap_function() {
         flexDirection: "row",
       }}
     >
+      <Paper
+            sx={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100%",
+              backgroundColor: "rgba(0, 0, 0, 0.25)", // Semi-transparent black overlay
+              zIndex: "4", // Place the overlay above the background image
+            }}
+          ></Paper>
       <Box
         sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
       >

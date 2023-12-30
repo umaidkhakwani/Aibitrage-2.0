@@ -221,7 +221,7 @@ function Bridge_function() {
               left: 0,
               width: "100%",
               height: "100%",
-              backgroundColor: "rgba(0, 0, 0, 0.1)", // Semi-transparent black overlay
+              backgroundColor: "rgba(0, 0, 0, 0.25)", // Semi-transparent black overlay
               zIndex: "4", // Place the overlay above the background image
             }}
           ></Paper>
