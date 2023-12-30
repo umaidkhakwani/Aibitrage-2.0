@@ -344,6 +344,22 @@ function Swap_function() {
               >
                 $40,000
               </Typography> */}
+               <Typography
+                sx={{
+                  fontFamily: "Aclonica",
+                  fontSize: isSmScreen ? "9px" : "11px",
+                  color: "white",
+                  fontSize:isSmScreen? "16px": isMdScreen? "18px":"26px",
+                  position: "absolute",
+                  bottom: "24px",
+                  left:"90px",
+                  width: "52%",
+                  height: "38px",
+                  margin: "5px",
+                }}
+              >
+                COMING SOON
+              </Typography>
               <input
                 type="text"
                 value={userInput}

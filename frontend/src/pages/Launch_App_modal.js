@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
 import "../fonts/fonts.css";
 import { Container, Typography } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
-const Launch_App_ModalComponent = () => {
+const Launch_App_ModalComponent = ({launch_callback}) => {
   const [modalIsOpen, setModalIsOpen] = useState(true);
 
   const theme = useTheme();
@@ -14,14 +14,28 @@ const Launch_App_ModalComponent = () => {
   const isLgScreen = useMediaQuery(theme.breakpoints.down("lg"));
   const matches = useMediaQuery("(min-width:600px)");
 
-
   const closeModal = () => {
+    console.log("close modal");
     setModalIsOpen(false);
+    launch_callback(true);
   };
+  const openModal = () => {
+    console.log("open modal");
+    setModalIsOpen(true);
+  };
+
+  useEffect(() => {
+    console.log("useEffect triggered", modalIsOpen);
+    if (!modalIsOpen) {
+      closeModal(); // Ensure modal closes visually even if state change doesn't trigger re-render
+    }
+  }, [modalIsOpen]);
+  
+
 
   return (
     <Modal
-      isOpen={modalIsOpen}
+      isOpen={modalIsOpen} // Pass the boolean state value
       onRequestClose={closeModal}
       style={{
         overlay: {
@@ -53,57 +67,64 @@ const Launch_App_ModalComponent = () => {
         },
       }}
     >
-      <Container sx={{width:"100%", height:"100%", display:"flex", justifyContent:"center", alignItems:"center", flexDirection:"column"}}>
-
-      <Typography
+      <Container
         sx={{
-          color: "#FFF",
-          fontFamily: "Aclonica",
-          fontSize: "38px",
-          fontStyle: "normal",
-          textAlign: "center",
-        }}
-      >
-        Launch App
-      </Typography>
-
-      <Typography
-        sx={{
-          color: "#FFF",
-          fontFamily: "Lora",
-          fontSize: "14px",
-          fontStyle: "normal",
-          textAlign: "justify",
-          
-        }}
-      >
-        Launch App is disable for mobile view. To access the app, please use a desktop or laptop.
-      </Typography>
-
-      <div
-        style={{
+          width: "100%",
+          height: "100%",
           display: "flex",
-          justifyContent: "space-between",
-          marginTop: "20px",
+          justifyContent: "center",
+          alignItems: "center",
+          flexDirection: "column",
         }}
       >
-        <button
-          style={{
-            background: "#50A883",
-            color: "white",
-            padding: "5px 20px",
-            borderRadius: "20px",
-            border:"none",
-            margin:"5px 20px",
-            fontFamily:"Rakkas",
+        <Typography
+          sx={{
+            color: "#FFF",
+            fontFamily: "Aclonica",
+            fontSize: "38px",
+            fontStyle: "normal",
+            textAlign: "center",
           }}
-          onClick={closeModal}
         >
-          Cancel
-        </button>
-      </div>
-      </Container>
+          Launch App
+        </Typography>
 
+        <Typography
+          sx={{
+            color: "#FFF",
+            fontFamily: "Lora",
+            fontSize: "14px",
+            fontStyle: "normal",
+            textAlign: "justify",
+          }}
+        >
+          Launch App is disable for mobile view. To access the app, please use a
+          desktop or laptop.
+        </Typography>
+
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            marginTop: "20px",
+          }}
+        >
+          <button
+            style={{
+              background: "#50A883",
+              color: "white",
+              padding: "5px 20px",
+              borderRadius: "20px",
+              border: "none",
+              margin: "5px 20px",
+              fontFamily: "Rakkas",
+            }}
+            onClick={closeModal}
+          >
+            Cancel
+          </button>
+        </div>
+      </Container>
     </Modal>
   );
 };

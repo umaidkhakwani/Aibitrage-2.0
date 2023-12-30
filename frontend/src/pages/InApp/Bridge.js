@@ -5,6 +5,7 @@ import {
   Grid,
   Menu,
   MenuItem,
+  Paper,
   Typography,
 } from "@mui/material";
 
@@ -213,6 +214,17 @@ function Bridge_function() {
   return (
     <div>
       {/* 1st Box */}
+      <Paper
+            sx={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100%",
+              backgroundColor: "rgba(0, 0, 0, 0.1)", // Semi-transparent black overlay
+              zIndex: "4", // Place the overlay above the background image
+            }}
+          ></Paper>
       <Box
         sx={{
           width: "900px",

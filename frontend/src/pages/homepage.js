@@ -20,6 +20,7 @@ import {
   TextField,
   Toolbar,
   Typography,
+  useControlled,
 } from "@mui/material";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 import bg1 from "../images/background1.png";
@@ -50,15 +51,19 @@ import usdt_trend from "../images/usdt_trend.svg";
 import eth_trend from "../images/eth_trend.svg";
 import bnb_trend from "../images/bnb_trend.svg";
 import xrp_trend from "../images/xrp_trend.svg";
+import solana_trend from "../images/solana_trend.svg";
+
 import bnb_chart from "../images/bnb_chart.png";
 import btc_chart from "../images/btc_chart.png";
 import usdt_chart from "../images/usdt_chart.png";
 import eth_chart from "../images/eth_chart.png";
 
 import btc from "../images/btc.png";
+import bnb from "../images/bnb.png";
 import usdt from "../images/usdt.png";
 import eth from "../images/eth.png";
 import xrp from "../images/xrp.png";
+import solana from "../images/solana.png";
 
 import graph1 from "../images/graph1.png";
 import graph2 from "../images/graph2.png";
@@ -132,66 +137,47 @@ const GlowingEffectContainer = styled(Grid)`
 
 const tableData = [
   {
-    pool: "Pool 1",
-    combinedAPR: "10%",
-    totalLiquidity: "$1,000,000",
-    volume24h: "$100,000",
+    name: "Bitcoin",
+    symbol: "BTC",
+    change: 5.01,
+    price: 2400.33,
+    image: btc,
   },
   {
-    pool: "Pool 2",
-    combinedAPR: "8%",
-    totalLiquidity: "$800,000",
-    volume24h: "$80,000",
+    name: "USDT",
+    symbol: "USDT",
+    change: 2.32,
+    price: 1.33,
+    image: usdt,
   },
   {
-    pool: "Pool 3",
-    combinedAPR: "10%",
-    totalLiquidity: "$1,000,000",
-    volume24h: "$100,000",
+    name: "Ethereum",
+    symbol: "ETH",
+    change: 0.63,
+    price: 1032.73,
+    image: eth,
   },
   {
-    pool: "Pool 4",
-    combinedAPR: "8%",
-    totalLiquidity: "$800,000",
-    volume24h: "$80,000",
+    name: "Solana",
+    symbol: "SOL",
+    change: -0.63,
+    price: 657.21,
+    image: solana,
   },
   {
-    pool: "Pool 5",
-    combinedAPR: "10%",
-    totalLiquidity: "$1,000,000",
-    volume24h: "$100,000",
+    name: "XRP Ripple",
+    symbol: "XRP",
+    change: -0.32,
+    price: 23.56,
+    image: xrp,
   },
   {
-    pool: "Pool 6",
-    combinedAPR: "8%",
-    totalLiquidity: "$800,000",
-    volume24h: "$80,000",
+    name: "Binance",
+    symbol: "BNB",
+    change: -0.98,
+    price: 3400.56,
+    image: bnb,
   },
-  {
-    pool: "Pool 7",
-    combinedAPR: "10%",
-    totalLiquidity: "$1,000,000",
-    volume24h: "$100,000",
-  },
-  {
-    pool: "Pool 8",
-    combinedAPR: "8%",
-    totalLiquidity: "$800,000",
-    volume24h: "$80,000",
-  },
-  {
-    pool: "Pool 9",
-    combinedAPR: "10%",
-    totalLiquidity: "$1,000,000",
-    volume24h: "$100,000",
-  },
-  {
-    pool: "Pool 10",
-    combinedAPR: "8%",
-    totalLiquidity: "$800,000",
-    volume24h: "$80,000",
-  },
-  // Add more dummy data as needed
 ];
 
 function Homepage({ callback }) {
@@ -266,6 +252,8 @@ function Homepage({ callback }) {
               ? usdt
               : coin.symbol === "ETH"
               ? eth
+              : coin.symbol === "SOL"
+              ? solana
               : coin.symbol === "XRP"
               ? xrp
               : "";
@@ -277,6 +265,7 @@ function Homepage({ callback }) {
         setCoinsData(nameAndPriceArray);
       })
       .catch((error) => {
+        setCoinsData(tableData)
         console.error("Error:", error);
       });
 
@@ -327,6 +316,9 @@ function Homepage({ callback }) {
   useEffect(() => {
     console.log("filteredData", filteredData);
   }, [filteredData]);
+
+  // const dataToUse = coinsData ? coinsData : tableData;
+  // console.log("dataToUse",dataToUse);
 
   return (
     <>
@@ -516,7 +508,8 @@ function Homepage({ callback }) {
             width: "100%",
             height: "100%",
             position: "relative",
-            bottom: isXlScreen?"0px":"125px",
+            bottom: isXlScreen ? "0px" : "125px",
+            margin: "50px 0px",
           }}
         >
           <Typography
@@ -532,14 +525,31 @@ function Homepage({ callback }) {
           >
             Market Trend
           </Typography>
-          <Container sx={{ width: "80%", height: "100%" }}>
-            <Grid container sx={{ width: "100%", height: "100%" }}>
+          <Container
+            sx={{
+              width: "100%",
+              height: "100%",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Grid
+              container
+              sx={{
+                width: "80%",
+                height: "100%",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
               <Grid
                 item
                 xs={12}
                 sm={6}
                 md={6}
-                lg={3}
+                lg={4}
                 sx={{
                   height: "100%",
                   color: "white",
@@ -619,7 +629,7 @@ function Homepage({ callback }) {
                 xs={12}
                 sm={6}
                 md={6}
-                lg={3}
+                lg={4}
                 sx={{
                   height: "100%",
                   color: "white",
@@ -699,7 +709,7 @@ function Homepage({ callback }) {
                 xs={12}
                 sm={6}
                 md={6}
-                lg={3}
+                lg={4}
                 sx={{
                   height: "100%",
                   color: "white",
@@ -779,7 +789,7 @@ function Homepage({ callback }) {
                 xs={12}
                 sm={6}
                 md={6}
-                lg={3}
+                lg={4}
                 sx={{
                   height: "100%",
                   color: "white",
@@ -802,6 +812,86 @@ function Homepage({ callback }) {
                 >
                   <img
                     src={usdt_trend}
+                    alt="logo"
+                    style={{
+                      padding: isSmScreen ? "0px 10px" : "0px",
+                      width: "150px",
+                      marginBottom: "10px",
+                    }}
+                  />
+                  <Grid
+                    container
+                    sx={{ padding: isSmScreen ? "0px 10px" : "0px" }}
+                  >
+                    <Grid item xs={6} sm={6} md={6} lg={6}>
+                      <Typography
+                        variant="h6"
+                        sx={{
+                          fontFamily: "Roboto",
+                          fontSize: "16px",
+                          lineHeight: "1.2",
+                          color: "#ECF1F0",
+                        }}
+                      >
+                        $
+                        {coinsData && coinsData[0] && coinsData[0].price
+                          ? (coinsData[2]?.price).toFixed(4)
+                          : "$43000"}
+                      </Typography>
+
+                      <Typography
+                        variant="h6"
+                        sx={{
+                          fontFamily: "Roboto",
+                          fontSize: "12px",
+                          color: "#B6B6B6",
+                          lineHeight: "1.2",
+                        }}
+                      >
+                        {coinsData && coinsData[0] && coinsData[0].change
+                          ? (coinsData[2]?.change).toFixed(4)
+                          : "$43000"}
+                        %
+                      </Typography>
+                    </Grid>
+                    <Grid item xs={6} sm={6} md={6} lg={6}>
+                      <img
+                        src={usdt_chart}
+                        alt="logo"
+                        style={{ width: "100px" }}
+                      />
+                    </Grid>
+                  </Grid>
+                </Container>
+              </Grid>
+              <Grid
+                item
+                xs={12}
+                sm={6}
+                md={6}
+                lg={4}
+                sx={{
+                  height: "100%",
+                  color: "white",
+                  display: "flex",
+                  justifyContent: "center",
+                  margin: "15px 0px",
+                  alignItems: "center",
+                }}
+              >
+                <Container
+                  sx={{
+                    background: "transparent",
+                    width: "220px",
+                    height: "115px",
+                    borderRadius: "10px",
+                    backgroundColor: "rgba(255, 255, 255, 0.1)",
+                    backdropFilter: "blur(8px)",
+                    padding: "10px 0px",
+                  }}
+                >
+                  <img
+                    src={solana_trend}
                     alt="logo"
                     style={{
                       padding: isSmScreen ? "0px 10px" : "0px",
@@ -1062,10 +1152,10 @@ function Homepage({ callback }) {
                   developed using AI technology. This algorithm evaluates
                   cryptocurrencies across blockchains, identifying opportunities
                   for pure arbitrage by analyzing swaps, CEX’s, and DEX’s. The
-                  algorithm monitors crucial details. Built on over two
-                  years of research and networking, AIBITRAGE introduces a new
-                  era of trading, providing accurate insights and
-                  modern knowledge for crypto enthusiasts.
+                  algorithm monitors crucial details. Built on over two years of
+                  research and networking, AIBITRAGE introduces a new era of
+                  trading, providing accurate insights and modern knowledge for
+                  crypto enthusiasts.
                   <br />
                   <br />
                 </Typography>
@@ -1200,7 +1290,7 @@ function Homepage({ callback }) {
                     borderRadius: "15px",
                     marginTop: "10px",
                     background:
-                    "linear-gradient(101deg, #1F8EBE -5.36%, #440495 29.46%, #440495 56.03%, #B102CD 81.92%)",
+                      "linear-gradient(101deg, #1F8EBE -5.36%, #440495 29.46%, #440495 56.03%, #B102CD 81.92%)",
                     color: "#fff",
                     cursor: "pointer",
                     textDecoration: "none",
@@ -1772,6 +1862,7 @@ function Homepage({ callback }) {
                         row.symbol === "BTC" ||
                         row.symbol === "ETH" ||
                         row.symbol === "USDT" ||
+                        row.symbol === "SOL" ||
                         row.symbol === "XRP" ? (
                           <TableRow
                             key={index}

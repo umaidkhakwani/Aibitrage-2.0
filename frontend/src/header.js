@@ -422,7 +422,7 @@ function Header_Function() {
               </button>
             </Grid>
           </Grid>
-          {app_active ? "" : <Launch_App_ModalComponent />}
+          {app_active ? "" : <Launch_App_ModalComponent launch_callback={set_App_active}/>}
           {/* <Paper
           sx={{
             position: "absolute",
