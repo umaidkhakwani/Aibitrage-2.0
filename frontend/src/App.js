@@ -17,9 +17,17 @@ import Privacy_policy from "./pages/privacy_policy";
 import Not_found from "./pages/not_found";
 import Report_bug from "./pages/report_bug";
 import Main from "./pages/InApp/Main";
-import { XRPLClient } from "@nice-xrpl/react-xrpl";
+// import { XRPLClient } from "@nice-xrpl/react-xrpl";
+// import { Web3ReactProvider } from "@web3-react/core";
+// import { providers } from 'ethers';
 
 const App = () => {
+  // const getLibrary = (provider) => {
+  //   const library = new providers.JsonRpcProvider(provider); // Updated for v5
+  //   library.pollingInterval = 8000;
+  //   return library;
+  // };
+
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path="/" element={<Root />}>
@@ -33,23 +41,17 @@ const App = () => {
         <Route path="/Not_found" element={<Not_found />} />
         <Route path="/Report_bug" element={<Report_bug />} />
         <Route path="/app" element={<Main />} />
-
-        {/* <Route path="/about" element = {<About />}/>
-      <Route path="/signup" element = {<SignUp />}/>
-      <Route path="/login" element = {<Login />}/>
-      <Route path="/forget_pass" element = {<Forget_password />}/>
-      <Route path="/dashboard" element = {<Dashboard />}/>
-      <Route path="/pos" element = {<Sidebar_pos />}/> */}
-        {/* <Route path="/dashboard" element = {<Dashboard />}/> */}
       </Route>
     )
   );
 
   return (
     <div>
-      <XRPLClient>
+      {/* <XRPLClient> */}
+      {/* <Web3ReactProvider getLibrary={getLibrary}> */}
         <RouterProvider router={router} />
-      </XRPLClient>
+      {/* </Web3ReactProvider> */}
+      {/* </XRPLClient> */}
     </div>
   );
 };

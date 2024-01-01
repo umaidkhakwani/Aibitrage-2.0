@@ -8,50 +8,78 @@ const ConnectWallet = () => {
   const [balance, setBalance] = useState(null);
 
   useEffect(() => {
-    // Function to connect to MetaMask
     const connectToMetaMask = async () => {
-      // Check if MetaMask is installed
-      if (window.ethereum) {
-        try {
-          // Request account access
-          await window.ethereum.request({ method: 'eth_requestAccounts' });
-          const web3 = new Web3(window.ethereum);
+      try {
+        if (typeof window.ethereum !== 'undefined' || (window.web3 && window.web3.currentProvider)) {
+          const web3 = new Web3(window.ethereum || window.web3.currentProvider);
 
-          // Get the current account
+          // Prompt user to connect their MetaMask wallet
+          await window.ethereum.enable();
+
           const accounts = await web3.eth.getAccounts();
-          setAccount(accounts[0]);
+          if (accounts.length > 0) {
+            setAccount(accounts[0]);
 
-          // Get the balance
-          const ethBalance = await web3.eth.getBalance(accounts[0]);
-          // Convert balance from Wei to Ether
-          const etherBalance = web3.utils.fromWei(ethBalance, 'ether');
-          setBalance(etherBalance);
-        } catch (error) {
-          console.error('Error connecting to MetaMask:', error.message);
+            const ethBalance = await web3.eth.getBalance(accounts[0]);
+            const etherBalance = web3.utils.fromWei(ethBalance, 'ether');
+            setBalance(etherBalance);
+          }
+        } else {
+          console.error('MetaMask is not installed');
         }
-      } else {
-        console.error('MetaMask is not installed');
+      } catch (error) {
+        console.error('Error connecting to MetaMask:', error.message);
       }
     };
 
     connectToMetaMask();
   }, []);
 
-  const backgroundColor =  account ? 'rgba(80, 168, 131, 0.7)' :'rgba(255, 61, 61, 0.6)';
+  useEffect(() => {
+    const handleAccountsChanged = async (accounts) => {
+      if (accounts.length > 0) {
+        setAccount(accounts[0]);
+
+        const web3 = new Web3(window.ethereum);
+        const ethBalance = await web3.eth.getBalance(accounts[0]);
+        const etherBalance = web3.utils.fromWei(ethBalance, 'ether');
+        setBalance(etherBalance);
+      } else {
+        setAccount(null);
+        setBalance(null);
+      }
+    };
+
+    if (window.ethereum) {
+      window.ethereum.on('accountsChanged', handleAccountsChanged);
+
+      return () => {
+        window.ethereum.off('accountsChanged', handleAccountsChanged);
+      };
+    }
+  }, []);
+
+  const backgroundColor = account ? 'rgba(80, 168, 131, 0.7)' : 'rgba(255, 61, 61, 0.6)';
 
   return (
     <Box sx={{
-        background: backgroundColor, // Transparent background with 0.25 opacity
-        padding:"10px",
-        borderRadius:"10px",
+      background: backgroundColor, // Transparent background with 0.25 opacity
+      padding: "10px",
+      borderRadius: "10px",
     }}>
       {account ? (
         <Box>
-          <Typography sx={{fontFamily:"Aclonica", fontSize:"11px", color:"#FFFAFA"}}>Connected to MetaMask! Your account: {account}</Typography>
-          <Typography sx={{fontFamily:"Aclonica", fontSize:"14px", color:"#FFFAFA"}}>Balance: {balance} ETH</Typography>
+          <Typography sx={{ fontFamily: "Aclonica", fontSize: "11px", color: "#FFFAFA" }}>
+            Connected to Wallet! Your account: {account}
+          </Typography>
+          <Typography sx={{ fontFamily: "Aclonica", fontSize: "14px", color: "#FFFAFA" }}>
+            Balance: {balance} ETH
+          </Typography>
         </Box>
       ) : (
-        <Typography sx={{fontFamily:"Aclonica", fontSize:"12px", color:"#FFFAFA"}}>Connecting to MetaMask...</Typography>
+        <Typography sx={{ fontFamily: "Aclonica", fontSize: "12px", color: "#FFFAFA" }}>
+          Connecting to Wallet...
+        </Typography>
       )}
     </Box>
   );

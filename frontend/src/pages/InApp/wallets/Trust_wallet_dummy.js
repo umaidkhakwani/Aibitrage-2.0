@@ -88,7 +88,9 @@
 
 // export default Connect_TrustWallet;
 
+
 // -----------------------------------------------    try 2   ---------------------------------------------------
+
 
 // Import necessary modules and components
 
@@ -105,12 +107,13 @@
 
 //     // Make sure useBalance is properly defined or imported
 //     // const getXrpBalance = async (xrpAccount) => {
-//     //     const xrpBalance =  useBalance(); // Correct the function call
+//     //     const xrpBalance =  useBalance(); // Correct the function call  
 //     // };
 //     const isConnected = useIsConnected();
 //     const address = useWalletAddress();
 //     const wallet = useWallet();
 //     // const balance = useBalance();
+
 
 //     useEffect(() => {
 //         const connectToTrustWallet = async () => {
@@ -133,7 +136,7 @@
 //                 }
 //             } else {
 //                 console.error('TrustWallet is not installed');
-
+                
 //             }
 //         };
 
@@ -168,15 +171,13 @@
 
 // export default Connect_TrustWallet;
 
+
 // -----------------------------------------------    try 2   ---------------------------------------------------
 
-import { Box, Typography } from "@mui/material";
-import React, { useState, useEffect } from "react";
-import Web3 from 'web3'; // Import the web3 library
+import React, { useState } from 'react';
 
 function Connect_TrustWallet() {
   const [connected, setConnected] = useState(false);
-  const [account_details, set_account_details] = useState(false);
   const [balances, setBalances] = useState({
     btc: 0,
     eth: 0,
@@ -185,82 +186,46 @@ function Connect_TrustWallet() {
 
   const connectToTrustWallet = async () => {
     try {
-      // Initialize web3
-      const web3 = new Web3(window.ethereum);
-
       // Check if Trust Wallet extension is installed
-      const accounts = await web3.eth.getAccounts();
-
-      if (accounts.length === 0) {
-        console.error("No Ethereum accounts found.");
-        return;
-      }
-      set_account_details(accounts[0]);
-
-      // Fetch balances for all connected accounts
-      const accountBalances = await Promise.all(accounts.map(account => web3.eth.getBalance(account)));
-      console.log("Balances for all accounts:", accountBalances);
-
       if (window.trustWallet) {
         // Connect to Trust Wallet extension
         await window.trustWallet.enable();
 
-        // Fetch balances for BTC, ETH, and BNB (replace with actual Trust Wallet API calls)
-        // const btcBalance = await window.trustWallet.getBalance('bitcoin');
-        // const ethBalance = await window.trustWallet.getBalance('ethereum');
-        // const bnbBalance = await window.trustWallet.getBalance('binance');
+        // Fetch balances for BTC, ETH, and BNB
+        const btcBalance = await window.trustWallet.getBalance('bitcoin');
+        const ethBalance = await window.trustWallet.getBalance('ethereum');
+        const bnbBalance = await window.trustWallet.getBalance('binance');
+        
 
-        // setBalances({
-        //   btc: Number(btcBalance),
-        //   eth: Number(ethBalance),
-        //   bnb: Number(bnbBalance),
-        // });
+        setBalances({
+          btc: btcBalance,
+          eth: ethBalance,
+          bnb: bnbBalance,
+        });
 
         setConnected(true);
       } else {
-        alert(
-          "Trust Wallet extension not found. Please install and activate it."
-        );
+        alert('Trust Wallet extension not found. Please install and activate it.');
       }
     } catch (error) {
-      console.error("Error connecting to Trust Wallet:", error);
-      alert("Error connecting to Trust Wallet. Please try again.");
+      console.error('Error connecting to Trust Wallet:', error);
+      alert('Error connecting to Trust Wallet. Please try again.');
     }
   };
-  useEffect(() => {
-    connectToTrustWallet();
-  }, []);
-
-  const backgroundColor = connected ? 'rgba(80, 168, 131, 0.7)' : 'rgba(255, 61, 61, 0.6)';
 
   return (
-    <Box sx={{
-      background: backgroundColor, // Transparent background with 0.25 opacity
-      padding: "10px",
-      borderRadius: "10px",
-    }}>
+    <div>
       {!connected ? (
-        <Typography sx={{ fontFamily: "Aclonica", fontSize: "12px", color: "#FFFAFA" }}>
-        Connecting to TrustWallet...
-      </Typography>
-        // <button onClick={connectToTrustWallet}>Connect to Trust Wallet</button>
+        <button onClick={connectToTrustWallet}>Connect to Trust Wallet</button>
       ) : (
-        // <div>
-        //   <h1>Connected to Trust Wallet</h1>
-        //   <p>ETH Balance: {Web3.utils.fromWei(balances.eth, 'ether')} ETH</p>
-        //   {/* Display other balances similarly */}
-        // </div>
-        <Box>
-        <Typography sx={{ fontFamily: "Aclonica", fontSize: "11px", color: "#FFFAFA" }}>
-          Connected to TrustWallet: Your account: {account_details}
-        </Typography>
-        <Typography sx={{ fontFamily: "Aclonica", fontSize: "14px", color: "#FFFAFA" }}>
-          Balance: {Web3.utils.fromWei(balances.eth, 'ether')} ETH
-        </Typography>
-      </Box>
+        <div>
+          <h1>Connected to Trust Wallet</h1>
+          <p>BTC Balance: {balances.btc}</p>
+          <p>ETH Balance: {balances.eth}</p>
+          <p>BNB Balance: {balances.bnb}</p>
+        </div>
       )}
-      
-    </Box>
+    </div>
   );
 }
 

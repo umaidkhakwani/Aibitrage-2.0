@@ -170,17 +170,17 @@ function Swap_function() {
         flexDirection: "row",
       }}
     >
-      <Paper
-            sx={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              width: "100%",
-              height: "100%",
-              backgroundColor: "rgba(0, 0, 0, 0.25)", // Semi-transparent black overlay
-              zIndex: "4", // Place the overlay above the background image
-            }}
-          ></Paper>
+      {/* <Paper
+        sx={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          backgroundColor: "rgba(0, 0, 0, 0.25)", // Semi-transparent black overlay
+          zIndex: "4", // Place the overlay above the background image
+        }}
+      ></Paper> */}
       <Box
         sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
       >
@@ -355,18 +355,25 @@ function Swap_function() {
               >
                 $40,000
               </Typography> */}
-               <Typography
+              <Typography
                 sx={{
                   fontFamily: "Aclonica",
                   fontSize: isSmScreen ? "9px" : "11px",
-                  color: "white",
-                  fontSize:isSmScreen? "16px": isMdScreen? "18px":"26px",
+                  // color: "white",
+                  fontSize: isSmScreen ? "16px" : isMdScreen ? "18px" : "26px",
                   position: "absolute",
                   bottom: "24px",
-                  left:"90px",
+                  left: "90px",
                   width: "52%",
                   height: "38px",
                   margin: "5px",
+
+                  backgroundImage:
+                    "linear-gradient(90deg, #924C9E 1.04%, #F8A68C 58.22%, #6C97CD 91.77%)",
+                  WebkitBackgroundClip: "text",
+                  color: "transparent",
+                  textDecoration: "underline",
+                  display: "inline-block",
                 }}
               >
                 COMING SOON
@@ -552,7 +559,8 @@ function Swap_function() {
                     margin: "5px",
                   }}
                 >
-                  Balance {coinSelected2.wallet || "N/A"} {coinSelected2.symbol || "ETH"}
+                  Balance {coinSelected2.wallet || "N/A"}{" "}
+                  {coinSelected2.symbol || "ETH"}
                 </Typography>
               </Box>
               <Typography

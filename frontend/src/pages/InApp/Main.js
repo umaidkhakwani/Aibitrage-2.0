@@ -73,6 +73,7 @@ import axios from "axios";
 import ConnectWallet from "./wallets/Wallet";
 import Trust_wallet from "./wallets/Trust_wallet";
 import Connect_TrustWallet from "./wallets/Trust_wallet";
+import Wallet_Main from "./demo/Wallet_Main";
 
 function Main() {
   const theme = useTheme();
@@ -757,6 +758,7 @@ function Main() {
                         }}
                         onClick={
                           wallet.name === "Metamask" ? handle_metamask_connect : (wallet.name === "Coinbase" ? handle_coinbase_connect : handle_trustWallet_connect)
+                          // wallet.name === "Metamask" ? handle_metamask_connect : (wallet.name === "Coinbase" ? handle_coinbase_connect : handle_trustWallet_connect)
                         }
                       >
                         <button
@@ -780,7 +782,7 @@ function Main() {
                 </Box>
                 {connect_metaMask ? <ConnectWallet /> : ""}
                 <XRPLClient>
-                {connect_trustWallet ? <Connect_TrustWallet /> : ""}
+                {connect_trustWallet ? <Trust_wallet /> : ""}
                 </XRPLClient>
                 {connect_coinbase ? <ConnectWallet /> : ""}
               </Box>
