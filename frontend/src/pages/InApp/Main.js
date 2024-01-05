@@ -73,7 +73,6 @@ import axios from "axios";
 import ConnectWallet from "./wallets/Wallet";
 import Trust_wallet from "./wallets/Trust_wallet";
 import Connect_TrustWallet from "./wallets/Trust_wallet";
-import Wallet_Main from "./demo/Wallet_Main";
 
 function Main() {
   const theme = useTheme();
@@ -247,6 +246,7 @@ function Main() {
                         padding: "10px 10px",
                         margin: "10px 0px",
                         borderRadius: "10px",
+                        cursor:"pointer",
                         background:
                           pageOption === "pool"
                             ? "linear-gradient(101deg, #1F8EBE -5.36%, #440495 29.46%, #440495 56.03%, #B102CD 81.92%)"
@@ -274,6 +274,7 @@ function Main() {
                         padding: "10px 10px",
                         margin: "10px 0px",
                         borderRadius: "10px",
+                        cursor:"pointer",
                         background:
                           pageOption === "bridge"
                             ? "linear-gradient(101deg, #1F8EBE -5.36%, #440495 29.46%, #440495 56.03%, #B102CD 81.92%)"
@@ -300,6 +301,7 @@ function Main() {
                         flexDirection: "row",
                         margin: "10px 0px",
                         padding: "10px 10px",
+                        cursor:"pointer",
                         borderRadius: "10px",
                         background:
                           pageOption === "swap"
@@ -846,9 +848,9 @@ function Main() {
                     </Typography>
                   </Box>
                   <img
-                    src={connect_wallet}
+                    src={logo_top}
                     alt="Documentation Image"
-                    style={{ width: "20%", height: "100%" }}
+                    style={{ width: "18%", height: "100%" }}
                   />
                 </Box>
               ) : null}

@@ -214,6 +214,8 @@ function Bridge_function() {
   return (
     <div>
       {/* 1st Box */}
+    {/* -----------------------------------------  Overlay -------------------------------------- */}
+
       <Paper
             sx={{
               position: "absolute",
@@ -225,6 +227,8 @@ function Bridge_function() {
               zIndex: "4", // Place the overlay above the background image
             }}
           ></Paper>
+    {/* ------------------------------------------------------------------------------------------ */}
+
       <Box
         sx={{
           width: "900px",
