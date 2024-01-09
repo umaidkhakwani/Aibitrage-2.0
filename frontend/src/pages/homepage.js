@@ -230,6 +230,7 @@ function Homepage({ callback }) {
   const handleClick = () => {
     navigate("/app");
   };
+  
 
   const handleApi = async () => {
     const nameAndPriceArray = [];
@@ -239,12 +240,15 @@ function Homepage({ callback }) {
       .get("http://localhost:3001/api/cryptocurrency")
       .then((response) => {
         const data = response.data;
-        data.data.forEach((coin) => {
-          console.log("coin :", coin.quote.USD.price);
+        console.log("showing data", data.data.coins);
+        data.data.coins.forEach((coin) => {
+          if(coin.symbol === "BNB"){
+          }else{
+          // console.log("coin :", coin.quote.USD.price);
           let name = coin.name;
-          let price = coin.quote.USD.price;
+          let price = parseFloat(coin.price);
           let symbol = coin.symbol;
-          let change = coin.quote.USD.percent_change_1h;
+          let change = parseFloat(coin.change);
           let image =
             coin.symbol === "BTC"
               ? btc
@@ -259,6 +263,7 @@ function Homepage({ callback }) {
               : "";
           // const { name, "price" : quote: { USD: { price } } , "24hVolume": volume, change } = coin;
           nameAndPriceArray.push({ name, price, symbol, change, image });
+          }
         });
         console.log("API Response:", response.data);
         console.log("nameAndPriceArray:", nameAndPriceArray);
@@ -755,7 +760,7 @@ function Homepage({ callback }) {
                       >
                         $
                         {coinsData && coinsData[0] && coinsData[0].price
-                          ? (coinsData[5]?.price).toFixed(4)
+                          ? (coinsData[4]?.price).toFixed(4)
                           : "$43000"}
                       </Typography>
 
@@ -769,7 +774,7 @@ function Homepage({ callback }) {
                         }}
                       >
                         {coinsData && coinsData[0] && coinsData[0].change
-                          ? (coinsData[5]?.change).toFixed(4)
+                          ? (coinsData[4]?.change).toFixed(4)
                           : "$43000"}
                         %
                       </Typography>
@@ -915,7 +920,7 @@ function Homepage({ callback }) {
                       >
                         $
                         {coinsData && coinsData[0] && coinsData[0].price
-                          ? (coinsData[2]?.price).toFixed(4)
+                          ? (coinsData[3]?.price).toFixed(4)
                           : "$43000"}
                       </Typography>
 
@@ -929,7 +934,7 @@ function Homepage({ callback }) {
                         }}
                       >
                         {coinsData && coinsData[0] && coinsData[0].change
-                          ? (coinsData[2]?.change).toFixed(4)
+                          ? (coinsData[3]?.change).toFixed(4)
                           : "$43000"}
                         %
                       </Typography>

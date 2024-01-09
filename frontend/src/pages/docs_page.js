@@ -7,6 +7,12 @@ import new1 from "../images/new1.jpg";
 import background1 from "../images/homepage.svg";
 import about_bitrage from "../images/about_bitrage.svg";
 import how_bitrage_works from "../images/how_bitrage_works.svg";
+import pool_vid_gif from "../images/pool_vid.gif";
+import pool_vid_gif2 from "../images/pool_vid_gif2.mp4";
+import pool_vid_gif3 from "../images/pool_vid_gif3.mp4";
+import pool_details from "../images/vid_details.svg";
+import pool_details2 from "../images/vid_details2.svg";
+import pool_details3 from "../images/vid_details3.png";
 
 import "../fonts/fonts.css";
 import FooterFunction from "../footer";
@@ -118,7 +124,7 @@ function Docs_page() {
               padding: isMdLgScreen ? "0px 30px" : "0px 15px",
             }}
           >
-<Typography
+            <Typography
               variant="body1"
               align="center"
               sx={{
@@ -160,22 +166,47 @@ function Docs_page() {
             </Typography>
           </Grid>
           {isMdLgScreen && (
-            <Grid item xs={0} sm={0} md={6} lg={6} sx={{display:"flex", justifyContent:"center", alignItems:"center"}}>
-              <img
-                src={about_bitrage}
-                alt="Documentation Image"
+            <Grid
+              item
+              xs={0}
+              sm={0}
+              md={6}
+              lg={6}
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                flexDirection: "column",
+              }}
+            >
+              <video
+                width="60%"
+                height="auto"
+                autoPlay
+                loop
+                // muted
                 style={{
-                  width: "60%",
-                  height: "auto",
                   position: "relative",
                   zIndex: "2",
                 }}
+              >
+                <source src={pool_vid_gif2} type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+              <img
+                src={pool_details3}
+                alt="pool chart"
+                style={{ width: "500px", margin: "20px 0px" }}
               />
+              {/* <img
+          src={pool_vid_gif}
+          alt="pool chart"
+          style={{ width: "300px", margin: "20px 0px" }}
+        /> */}
             </Grid>
           )}
         </Grid>
         {/* </Box> */}
-
 
         {/* <Grid
           container

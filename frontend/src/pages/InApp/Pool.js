@@ -63,7 +63,7 @@ function Pool_function() {
   return (
     <Box
       sx={{
-        width: "80%",
+        width: "90%",
         height: "100%",
         marginTop: isSmScreen ? "250px" : "0px",
         display: "flex",
@@ -290,18 +290,21 @@ function Pool_function() {
       </Box> */}
       <Box
         sx={{
-          width: "95%",
+          width: "100%",
           height: "100%",
-          marginTop: "20px",
+          // marginTop: "20px",
+          display: "flex",
+          justifyContent: isMdScreen ? "center" :"flex-start",
+          alignItems: isMdScreen ? "center" :"center",
         }}
       >
         {/* Pool table */}
 
-        <Container
+        <Box
           sx={{
             background: "black",
             borderRadius: "10px",
-            width: "80%",
+            width: "90%",
             marginTop: "50px",
           }}
         >
@@ -328,6 +331,7 @@ function Pool_function() {
                         sx={{
                           fontFamily: "Poppins",
                           fontSize: "14px",
+                          textAlign: "center",
                           color: "#50A883",
                         }}
                       >
@@ -340,6 +344,7 @@ function Pool_function() {
                         sx={{
                           fontFamily: "Poppins",
                           fontSize: "14px",
+                          textAlign: "center",
                           color: "#50A883",
                         }}
                       >
@@ -353,6 +358,7 @@ function Pool_function() {
                           fontFamily: "Poppins",
                           fontSize: "14px",
                           color: "#50A883",
+                          textAlign: "center",
                         }}
                       >
                         ROI
@@ -377,6 +383,7 @@ function Pool_function() {
                           fontFamily: "Poppins",
                           fontSize: "14px",
                           color: "#50A883",
+                          textAlign: "center",
                         }}
                       >
                         Invest Now
@@ -432,7 +439,8 @@ function Pool_function() {
                           sx={{
                             fontFamily: "Poppins",
                             fontSize: "12px",
-                            color: "#fff",
+                          textAlign: "center",
+                          color: "#fff",
                           }}
                         >
                           {row.name}
@@ -444,7 +452,8 @@ function Pool_function() {
                           sx={{
                             fontFamily: "Poppins",
                             fontSize: "14px",
-                            color: "#B982FF",
+                          textAlign: "center",
+                          color: "#B982FF",
                           }}
                         >
                           {row.investment}
@@ -456,7 +465,8 @@ function Pool_function() {
                           sx={{
                             fontFamily: "Poppins",
                             fontSize: "14px",
-                            color: "#50A883",
+                          textAlign: "center",
+                          color: "#50A883",
                           }}
                         >
                           {row.ROI}%
@@ -505,10 +515,10 @@ function Pool_function() {
               </Table>
             </TableContainer>
           </div>
-        </Container>
+        </Box>
       </Box>
 
-      <Box
+      {/* <Box
         sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
       >
         <img
@@ -521,7 +531,7 @@ function Pool_function() {
           alt="pool chart"
           style={{ width: "300px", margin: "20px 0px" }}
         />
-      </Box>
+      </Box> */}
       {/* <video width="350px" height="auto" controls>
         <source src={pool_vid} type="video/mp4" />
         Your browser does not support the video tag.

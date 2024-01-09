@@ -850,7 +850,7 @@ function Main() {
                   <img
                     src={logo_top}
                     alt="Documentation Image"
-                    style={{ width: "18%", height: "100%" }}
+                    style={{ width: "18%", height: "100%", margin: "0px 5px" }}
                   />
                 </Box>
               ) : null}

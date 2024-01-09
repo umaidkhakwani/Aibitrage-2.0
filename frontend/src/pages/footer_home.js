@@ -62,10 +62,7 @@ function FooterFunction_home({ callback2 }) {
             }}
           >
             <img
-              src={footer_img
-              
-              
-              }
+              src={footer_img}
               alt="footer"
               style={{ margin: "0px auto", height: "120px" }}
             />
@@ -355,11 +352,18 @@ function FooterFunction_home({ callback2 }) {
               sx={{ justifyContent: "center", alignItems: "center" }}
             >
               <Grid item sx={{ margin: "0px" }}>
-                <img
-                  src={Twitter}
-                  alt="Twitter"
-                  style={{ height: "30px", width: "35px" }}
-                />
+                <a
+                  href="https://x.com/bitrageai"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {" "}
+                  <img
+                    src={Twitter}
+                    alt="Twitter"
+                    style={{ height: "30px", width: "35px" }}
+                  />
+                </a>
               </Grid>
               <Grid item sx={{ margin: "0px 30px" }}>
                 <img
@@ -369,11 +373,18 @@ function FooterFunction_home({ callback2 }) {
                 />
               </Grid>
               <Grid item sx={{ margin: "0px" }}>
-                <img
-                  src={Telegram}
-                  alt="Telegram"
-                  style={{ height: "30px", width: "35px" }}
-                />
+                <a
+                  href="https://t.me/bitrageai"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {" "}
+                  <img
+                    src={Telegram}
+                    alt="Telegram"
+                    style={{ height: "30px", width: "35px" }}
+                  />
+                </a>
               </Grid>
             </Grid>
           </Grid>

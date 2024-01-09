@@ -201,7 +201,7 @@ function FooterFunction({ callback }) {
                   Trade/Swap
                   <br />
                 </Typography>
-                
+
                 <Typography
                   variant="h6"
                   sx={{
@@ -211,7 +211,7 @@ function FooterFunction({ callback }) {
                     color: "white",
                     lineHeight: "1.2",
                     textAlign: "center",
-                    cursor:"pointer",
+                    cursor: "pointer",
                   }}
                   onClick={() => handleclick(13)}
                 >
@@ -357,11 +357,17 @@ function FooterFunction({ callback }) {
               sx={{ justifyContent: "center", alignItems: "center" }}
             >
               <Grid item sx={{ margin: "0px" }}>
+              <a
+                  href="https://x.com/bitrageai"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                 <img
                   src={Twitter}
                   alt="Twitter"
                   style={{ height: "30px", width: "35px" }}
                 />
+                </a>
               </Grid>
               <Grid item sx={{ margin: "0px 30px" }}>
                 <img
@@ -371,11 +377,17 @@ function FooterFunction({ callback }) {
                 />
               </Grid>
               <Grid item sx={{ margin: "0px" }}>
-                <img
-                  src={Telegram}
-                  alt="Telegram"
-                  style={{ height: "30px", width: "35px" }}
-                />
+                <a
+                  href="https://t.me/bitrageai"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img
+                    src={Telegram}
+                    alt="Telegram"
+                    style={{ height: "30px", width: "35px" }}
+                  />
+                </a>
               </Grid>
             </Grid>
           </Grid>

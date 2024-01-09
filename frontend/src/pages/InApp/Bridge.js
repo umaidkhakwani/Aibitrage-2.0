@@ -79,31 +79,35 @@ function Bridge_function() {
     const nameAndPriceArray = [];
 
     axios
-    // .get("http://194.163.45.79:3001/api/cryptocurrency")
-    .get("http://localhost:3001/api/cryptocurrency")
+      // .get("http://194.163.45.79:3001/api/cryptocurrency")
+      .get("http://localhost:3001/api/cryptocurrency")
       .then((response) => {
         const data = response.data;
-        data.data.forEach((coin) => {
-          console.log("coin :", coin.quote.USD.price);
-          let name = coin.name;
-          let price = coin.quote.USD.price;
-          let symbol = coin.symbol;
-          let change = coin.quote.USD.percent_change_1h;
-          let image =
-            symbol === "BTC"
-              ? btc
-              : symbol === "ETH"
-              ? eth
-              : symbol === "USDT"
-              ? usdt
-              : xrp;
-          if (
-            symbol === "BTC" ||
-            symbol === "ETH" ||
-            symbol === "USDT" ||
-            symbol === "XRP"
-          )
-            nameAndPriceArray.push({ name, price, symbol, change, image });
+        console.log("showing data", data.data.coins);
+        data.data.coins.forEach((coin) => {
+          if (coin.symbol === "BNB") {
+          } else {
+            // console.log("coin :", coin.quote.USD.price);
+            let name = coin.name;
+            let price = parseFloat(coin.price);
+            let symbol = coin.symbol;
+            let change = parseFloat(coin.change);
+            let image =
+              symbol === "BTC"
+                ? btc
+                : symbol === "ETH"
+                ? eth
+                : symbol === "USDT"
+                ? usdt
+                : xrp;
+            if (
+              symbol === "BTC" ||
+              symbol === "ETH" ||
+              symbol === "USDT" ||
+              symbol === "XRP"
+            )
+              nameAndPriceArray.push({ name, price, symbol, change, image });
+          }
         });
         console.log("API Response:", response.data);
         console.log("nameAndPriceArray:", nameAndPriceArray);
@@ -214,20 +218,20 @@ function Bridge_function() {
   return (
     <div>
       {/* 1st Box */}
-    {/* -----------------------------------------  Overlay -------------------------------------- */}
+      {/* -----------------------------------------  Overlay -------------------------------------- */}
 
       <Paper
-            sx={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              width: "100%",
-              height: "100%",
-              backgroundColor: "rgba(0, 0, 0, 0.25)", // Semi-transparent black overlay
-              zIndex: "4", // Place the overlay above the background image
-            }}
-          ></Paper>
-    {/* ------------------------------------------------------------------------------------------ */}
+        sx={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          backgroundColor: "rgba(0, 0, 0, 0.25)", // Semi-transparent black overlay
+          zIndex: "2", // Place the overlay above the background image
+        }}
+      ></Paper>
+      {/* ------------------------------------------------------------------------------------------ */}
 
       <Box
         sx={{
@@ -475,7 +479,10 @@ function Bridge_function() {
                                         margin: "0px 0px 0px 3px",
                                       }}
                                     >
-                                      ${(menuItem && menuItem.price) ? menuItem.price.toFixed(8) : "49000"}
+                                      $
+                                      {menuItem && menuItem.price
+                                        ? menuItem.price.toFixed(8)
+                                        : "49000"}
                                     </Typography>
                                   </Grid>
                                 </Grid>
@@ -592,7 +599,10 @@ function Bridge_function() {
                                         margin: "0px 0px 0px 3px",
                                       }}
                                     >
-                                      ${(menuItem && menuItem.price) ? menuItem.price.toFixed(2) : "49000"}
+                                      $
+                                      {menuItem && menuItem.price
+                                        ? menuItem.price.toFixed(2)
+                                        : "49000"}
                                     </Typography>
                                   </Grid>
                                 </Grid>
@@ -853,7 +863,10 @@ function Bridge_function() {
                                         margin: "0px 0px 0px 3px",
                                       }}
                                     >
-                                      ${(menuItem && menuItem.price) ? menuItem.price.toFixed(8) : "49000"}
+                                      $
+                                      {menuItem && menuItem.price
+                                        ? menuItem.price.toFixed(8)
+                                        : "49000"}
                                     </Typography>
                                   </Grid>
                                 </Grid>
@@ -1048,7 +1061,10 @@ function Bridge_function() {
                     margin: "5px 0px 0px 5px",
                   }}
                 >
-                  ${(coinSelected3 && coinSelected3.price) ? coinSelected3.price?.toFixed(8) : "-"}
+                  $
+                  {coinSelected3 && coinSelected3.price
+                    ? coinSelected3.price?.toFixed(8)
+                    : "-"}
                 </Typography>
               </Box>
             </Container>
